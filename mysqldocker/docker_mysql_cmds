@@ -1,0 +1,116 @@
+
+# build image from DockerFile
+docker build -t openmrs .
+
+# Run cointainer (--rm to remove container on exit)
+docker run --rm --name test -it -p 8080:8080 <container-name>
+
+# publish a container port
+docker run --publish=hostport:containerport ...
+
+
+# remove docker image or container
+docker image/container rm <container-id>/<container-name>
+
+# execute a command in running container
+docker exec -it ct_name  /bin/bash
+
+# Docker attach and detach
+docker attach  --detach-keys="<sequence>"  --name pandorafms
+docker attach  --detach-keys="ctrl-a"
+<sequence> -- ctrl-a
+# Container log
+docker logs -f <CONTAINER>
+docker logs --follow  <CONTAINER>
+
+# get os listening ports
+netstat -ltnpa | grep -i --colour LISTEN
+
+
+#create index epts_obs_concept_person on obs (concept_id,person_id);
+
+### creating containers for openmrs databases ###
+# parameters -d for detach mode
+#            -it for stdin 
+docker exec -it clean  /bin/bash && \ 
+apt-get install -y vim && vim /root/.OpenMRS/openmrs-runtime.properties 
+
+source schema_sp_export_modified.sql
+create database temp; use temp;
+source  mozart_sp_rmdups.sql;
+create database openmrs; use openmrs; source cs_muele.sql;
+
+
+call temp.proc_remove_dups_buscas();
+call temp.proc_remove_dups_filas();
+call export_db.EXPORTDB();
+
+############################################################################################
+docker run --name mzrt_inharrime -d  -v ~/epts/openmrs/backups:/opt/data -p 3310:3306 mozart && docker exec -it mzrt_inharrime  /bin/bash 
+docker run --name mzrt_zandamela -d  -v ~/epts/openmrs/backups:/opt/data -p 3311:3306 mozart && docker exec -it mzrt_zandamela  /bin/bash 
+docker run --name mzrt_quissico  -d  -v ~/epts/openmrs/backups:/opt/data -p 3312:3306 mozart && docker exec -it mzrt_quissico   /bin/bash 
+docker run --name mzrt_panda     -d  -v ~/epts/openmrs/backups:/opt/data -p 3313:3306 mozart && docker exec -it mzrt_panda  /bin/bash 
+
+docker run --name mzrt_maundene  -d  -v ~/epts/openmrs/backups:/opt/data -p 3314:3306 mozart && docker exec -it mzrt_maundene   /bin/bash 
+docker run --name mzrt_chongola  -d  -v ~/epts/openmrs/backups:/opt/data -p 3315:3306 mozart  docker exec -it mzrt_chongola   /bin/bash 
+docker run --name mzrt_cumbana   -d  -v ~/epts/openmrs/backups:/opt/data -p 3316:3306 mozart && docker exec -it mzrt_cumbana    /bin/bash 
+docker run --name mzrt_jangamo   -d  -v ~/epts/openmrs/backups:/opt/data -p 3317:3306 mozart && docker exec -it mzrt_jangamo    /bin/bash 
+docker run --name mzrt_muele     -d  -v ~/epts/openmrs/backups:/opt/data -p 3318:3306 mozart  && docker exec -it mzrt_muele      /bin/bash 
+docker run --name mzrt_hpi       -d  -v ~/epts/openmrs/backups:/opt/data -p 3319:3306 mozart  docker exec -it mzrt_hpi        /bin/bash 
+docker run --name mzrt_urbano    -d  -v ~/epts/openmrs/backups:/opt/data -p 3320:3306 mozart && docker exec -it mzrt_urbano     /bin/bash 
+
+
+docker run --name backup_ct    -d  -v ~/epts/openmrs/backups:/opt/data  mozart  docker exec -it backup_ct /bin/bash 
+
+docker run --name mzrt_salela      -d  -v ~/epts/openmrs/backups:/opt/data -p 3321:3306 mozart  docker exec -it mzrt_salela    /bin/bash 
+docker run --name mzrt_agostinho   -d  -v ~/epts/openmrs/backups:/opt/data -p 3322:3306 mozart  docker exec -it mzrt_agostinho /bin/bash 
+docker run --name mzrt_mabil       -d  -v ~/epts/openmrs/backups:/opt/data -p 3323:3306 mozart && docker exec -it mzrt_mabil     /bin/bash 
+docker run --name mzrt_maxixe      -d  -v ~/epts/openmrs/backups:/opt/data -p 3325:3306 mozart &&  docker exec -it mzrt_maxixe    /bin/bash 
+docker run --name mzrt_homoine     -d  -v ~/epts/openmrs/backups:/opt/data -p 3326:3306 mozart &&  docker exec -it mzrt_homoine  /bin/bash 
+docker run --name mzrt_chicuque    -d  -v ~/epts/openmrs/backups:/opt/data -p 3327:3306 mozart && docker exec -it mzrt_chicuque   /bin/bash 
+docker run --name mzrt_manhala     -d  -v ~/epts/openmrs/backups:/opt/data -p 3328:3306 mozart &&  docker exec -it mzrt_manhala   /bin/bash 
+docker run --name mzrt_morrumbene  -d  -v ~/epts/openmrs/backups:/opt/data -p 3329:3306 mozart && docker exec -it mzrt_morrumbene /bin/bash 
+docker run --name mzrt_massinga    -d  -v ~/epts/openmrs/backups:/opt/data -p 3330:3306 mozart && docker exec -it mzrt_massinga   /bin/bash 
+docker run --name mzrt_funhalouro  -d  -v ~/epts/openmrs/backups:/opt/data -p 3331:3306 mozart && docker exec -it mzrt_funhalouro /bin/bash 
+docker run --name mzrt_mapinhane   -d  -v ~/epts/openmrs/backups:/opt/data -p 3324:3306 mozart  docker exec -it mzrt_mapinhane   /bin/bash
+docker run --name mzrt_bembe       -d  -v ~/epts/openmrs/backups:/opt/data -p 3341:3306 mozart  && docker exec -it mzrt_bembe   /bin/bash
+
+
+docker run --name mzrt_hrv         -d  -v ~/epts/openmrs/backups:/opt/data -p 3332:3306 mozart && docker exec -it mzrt_hrv       /bin/bash 
+docker run --name mzrt_mabote      -d  -v ~/epts/openmrs/backups:/opt/data -p 3334:3306 mozart  docker exec -it mzrt_mabote    /bin/bash 
+docker run --name mzrt_mangungumete -d  -v ~/epts/openmrs/backups:/opt/data -p 3336:3306 mozart && docker exec -it mzrt_mangungumete  /bin/bash 
+docker run --name mzrt_inhassoro   -d  -v ~/epts/openmrs/backups:/opt/data -p 3337:3306 mozart && docker exec -it mzrt_inhassoro /bin/bash 
+docker run --name mzrt_doane       -d  -v ~/epts/openmrs/backups:/opt/data -p 3338:3306 mozart  && docker exec -it mzrt_doane     /bin/bash 
+docker run --name mzrt_chibuene    -d  -v ~/epts/openmrs/backups:/opt/data -p 3333:3306 mozart && docker exec -it mzrt_chibuene  /bin/bash 
+docker run --name mzrt_pambara     -d  -v ~/epts/openmrs/backups:/opt/data -p 3335:3306 mozart  docker exec -it mzrt_pambara   /bin/bash
+
+
+docker run --name mzrt_sitila   -d  -v ~/epts/openmrs/backups:/opt/data -p 3342:3306 mozart && docker exec -it mzrt_sitila  /bin/bash
+docker run --name mzrt_chiunze  -d  -v ~/epts/openmrs/backups:/opt/data -p 3343:3306 mozart && docker exec -it mzrt_chiunze /bin/bash
+docker run --name mzrt_cangela   -d  -v ~/epts/openmrs/backups:/opt/data -p 3344:3306 mozart && docker exec -it mzrt_cangela /bin/bash
+docker run --name mzrt_save   -d  -v ~/epts/openmrs/backups:/opt/data -p 3345:3306 mozart  && docker exec -it mzrt_save  /bin/bash
+docker run --name mzrt_maluvane   -d  -v ~/epts/openmrs/backups:/opt/data -p 3346:3306 mozart && docker exec -it mzrt_maluvane  /bin/bash
+docker run --name mzrt_cala   -d  -v ~/epts/openmrs/backups:/opt/data -p 3347:3306 mozart && docker exec -it mzrt_cala  /bin/bash
+docker run --name mzrt_muane   -d  -v ~/epts/openmrs/backups:/opt/data -p 3348:3306 mozart && docker exec -it mzrt_muane  /bin/bash
+
+docker run --name mzrt_mambone -d  -v ~/epts/openmrs/backups:/opt/data -p 3349:3306 mozart && docker exec -it mzrt_mambone  /bin/bash
+docker run --name mzrt_belane   -d  -v ~/epts/openmrs/backups:/opt/data -p 3350:3306 mozart && docker exec -it mzrt_belane /bin/bash
+docker run --name mzrt_riopedras -d  -v ~/epts/openmrs/backups:/opt/data -p 3351:3306 mozart && docker exec -it mzrt_riopedras /bin/bash
+
+docker run --name mzrt_mahangue -d  -v ~/epts/openmrs/backups:/opt/data -p 3352:3306 mozart && docker exec -it mzrt_mahangue  /bin/bash
+docker run --name mzrt_inhaloi  -d  -v ~/epts/openmrs/backups:/opt/data -p 3353:3306 mozart && docker exec -it mzrt_inhaloi /bin/bash
+
+docker run --name mzrt_muvamba -d  -v ~/epts/openmrs/backups:/opt/data -p 3354:3306 mozart && docker exec -it mzrt_muvamba  /bin/bash
+docker run --name mzrt_inhassune  -d  -v ~/epts/openmrs/backups:/opt/data -p 3355:3306 mozart && docker exec -it mzrt_inhassune /bin/bash
+
+
+docker run --name mzrt_mocodoene -d  -v ~/epts/openmrs/backups:/opt/data -p 3354:3306 mozart && docker exec -it mzrt_mocodoene  /bin/bash
+docker run --name mzrt_cambine  -d  -v ~/epts/openmrs/backups:/opt/data -p 3355:3306 mozart && docker exec -it mzrt_cambine /bin/bash
+
+
+
+docker run --name mzrt_gaza    -d  -v ~/epts/openmrs/backups:/opt/data -p 3339:3306 mozart  docker exec -it mzrt_gaza /bin/bash
+docker run --name reports  -d  -v ~/epts/openmrs/backups:/opt/data -p 8080:8080 mozart  docker exec -it reports /bin/bash
+
+
+
