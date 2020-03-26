@@ -47,7 +47,8 @@ docker exec -it openmrs_reports     bash
 docker run --name inhagoia     -d -p 8083:8080 openmrs:v1.11.6   
 docker exec -it inhagoia     bash
 
-docker run --name postgresql     -d -p 5432:5432 openmrs:v1.11.6    
+docker run --name catembe     -d -p 8084:8080 openmrs:v1.11.6   
+docker exec -it catembe     bash
 
 
 chmod 0444 cfg/mysql-5.7/my.cnf
