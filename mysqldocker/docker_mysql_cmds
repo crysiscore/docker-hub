@@ -1,6 +1,6 @@
 
 # build image from DockerFile
-docker build -t openmrs .
+docker build -t mysql:v5.6 .
 
 # Run cointainer (--rm to remove container on exit)
 docker run --rm --name test -it -p 8080:8080 <container-name>
