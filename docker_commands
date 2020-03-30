@@ -35,6 +35,25 @@ docker exec -it mapinhane  /bin/bash && \
 apt-get install -y nano && nano /root/.OpenMRS/openmrs-runtime.properties
 
 	sed -i -e 's/openmrs_inh_/openmrs_inh_/g' /root/.OpenMRS/openmrs-runtime.properties
+
 #################################################
+<<<<<<< HEAD
 docker run --name reports     -d -p 8080:8080 openmrs:v1.11.6    
 docker run --name albazine     -d -p 8081:8080 openmrs:v1.11.6 
+=======
+docker run --name albazine     -d -p 8081:8080 openmrs:v1.11.6    
+
+
+docker run --name openmrs_reports     -d -p 8082:8080 openmrs:v1.11.6  
+docker exec -it openmrs_reports     bash
+
+
+docker run --name inhagoia     -d -p 8083:8080 openmrs:v1.11.6   
+docker exec -it inhagoia     bash
+
+docker run --name catembe     -d -p 8084:8080 openmrs:v1.11.6   
+docker exec -it catembe     bash
+
+
+chmod 0444 cfg/mysql-5.7/my.cnf
+>>>>>>> 34cc7da0176ac5cf404b1903e087aef048378b16
