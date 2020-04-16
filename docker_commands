@@ -43,9 +43,13 @@ docker run --name inhagoia       -d -p 8083:8080 openmrs:v1.11.6
 docker run --name catembe        -d -p 8084:8080 openmrs:v1.11.6   
 docker run --name 1maio          -d -p 8085:8080 openmrs:v1.11.6  
 docker run --name polanacanico   -d -p 8086:8080 openmrs:v1.11.6  
+docker run --name junho          -d -p 8087:8080 openmrs:v1.11.6  
+docker run --name jmcs          -d -p 8088:8080 openmrs:v1.11.6  
 
 chmod 0444 cfg/mysql-5.7/my.cnf
 
 ###########################   PostgreSQL      ######################
 docker build -t postgres:v9.6 .
 docker run --name postgres  -d  -v ~/Documents/iDART:/opt/data      -p 5432:5432 postgres:v9.6
+docker run --name syncentral  -d  -v ~/Documents/iDART:/opt/data      -p 5433:5432 postgres:v9.6
+docker run --name psql_albazine  -d  -v ~/Documents/iDART:/opt/data      -p 5434:5432 postgres:v9.6
