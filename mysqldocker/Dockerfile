@@ -33,6 +33,3 @@ RUN apt-get clean && rm -rf  /tmp/* /var/tmp/*
 
 EXPOSE 3306
 #CMD ["/usr/bin/mysqld_safe"]
-
-
-
