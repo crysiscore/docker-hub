@@ -1,0 +1,54 @@
+docker start postgres_server mysql_server
+docker stop postgres_server mysql_server
+docker
+
+
+drop database if exists junho;
+drop database if exists maio;
+drop database if exists xipamanine;
+drop database if exists pharm;
+drop database if exists albazine;
+drop database if exists bagamoio;
+drop database if exists farmac_jardim;
+drop database if exists canico;
+drop database if exists magoanine;
+
+
+
+create database junho;
+create database maio;
+create database xipamanine;
+create database pharm; 
+create database albazine;
+create database bagamoio;
+create database farmac_jardim;
+create database farmac_magoanine;
+create database canico;
+create database magoanine;
+
+
+
+create database junho;
+create database maio;
+create database xipamanine;
+create database albazine;
+create database bagamoio;
+create database canico;
+create database magoanine;
+create database jmcs;
+create database porto;
+
+pg_restore -Upostgres  -d junho < /data/junho/pharm_junho_2020-05-11.backup 
+psql -Upostgres -d  maio < /data/maio/pharm202004160950.sql
+pg_restore -Upostgres -d  xipamanine < /data/xipamanine/backupidart27_04_2020.backup
+psql -Upostgres -d  pharm  < /data/porto/pharm202003301030.sql   
+psql -Upostgres -d  albazine < /data/albazine/pharm202003301259.sql
+pg_restore -Upostgres -d  bagamoio < /data/bagamoio/BackUpIdartBagamoiohoje.backup
+pg_restore -Upostgres -d  farmac_jardim < /data/farmac_jardim/Farmac_Jardim18042020.backup
+pg_restore -Upostgres -d  farmac_magoanine < /data/farmac_backups/farmacMagoanine/pharm202001101400.sql
+psql -Upostgres -d  efila < /data/efila_padronizado/eFilaNewInstalationCleanDB.backup 
+
+pg_restore -Upostgres -d jmcs < /data/jmcs/josemacamo.backup
+
+psql -Upostgres -d  canico < /data/canico/pharm202004151300.sql
+psql -Upostgres -d  magoanine < /data/magoanine/pharm202001101400.sql

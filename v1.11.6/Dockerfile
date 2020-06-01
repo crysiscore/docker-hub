@@ -1,6 +1,6 @@
 #Base image for openmrs
-#Download base image ubuntu 16.04
-FROM ubuntu:16.04
+#Download base image sebian 16.04
+FROM debian:stretch-slim
 
 
 LABEL mantainer="Agnaldo Samuel  <asamuel@pedaids.org>"

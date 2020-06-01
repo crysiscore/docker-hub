@@ -1,16 +1,5 @@
-PostgreSQL Dockerfile
-A Dockerfile that produces a Docker Image for PostgreSQL.
 
-PostgreSQL version
-The master branch currently hosts PostgreSQL 9.4.
-
-Different versions of PostgreSQL are located at the github repo branches.
-
-Usage
-Build the image
-To create the image frodenas/postgresql, execute the following command on the docker-postgresql folder:
-
-$ docker build -t frodenas/postgresql .
+$ docker build -t postgresql:9.6 .
 Run the image
 To run the image and bind to host port 5432:
 

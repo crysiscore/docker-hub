@@ -1,6 +1,6 @@
 
 # build image from DockerFile
-docker build -t mysql:v5.6 .
+docker build -t mysql:5.6 .
 
 # Run cointainer (--rm to remove container on exit)
 docker run --rm --name test -it -p 8080:8080 <container-name>
@@ -49,7 +49,6 @@ call export_db.EXPORTDB();
 docker run --name datawarehouse  -d  -v ~/Documents/openmrs/backups:/opt/data -p 3310:3306 openmrs 
 && docker exec -it datawarehouse  /bin/bash 
 
- docker run --name postgresql  -v ~/Documents/iDART/Backups:/opt/data     -d -p 5432:5432 -p 3311:3306 openmrs   
 
 docker run --name reports  -d  -v ~/Documents/openmrs/backups:/opt/data -p 3333:3306 openmrs &&
  docker exec -it reports  /bin/bash 

@@ -6,10 +6,10 @@ docker run --name postgres_farmac  -d  -v ~/Docker/files:/opt/data    -p 5455:54
 
 $ docker run -d \
     --name postgres_farmac \
-    -p 5455:5455  \
+    -p 5455:5432   \
     -e POSTGRES_USERNAME=pgadmin \
     -e POSTGRES_PASSWORD=iD@rt2020 \
-    frodenas/postgresql
+    postgres:v9.6_farmac
 
 ############################  Docker Commands ##################################################
 # build image from DockerFile

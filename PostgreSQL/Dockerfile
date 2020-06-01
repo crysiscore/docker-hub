@@ -1,9 +1,3 @@
-#Base image for PostgresSQL 9.6 on ubuntu 16.04
-#Download base image ubuntu 16.04
-FROM ubuntu:16.04
-LABEL mantainer="Agnaldo Samuel  <agnaldosamuel@ccsaude.org.mz>"
-
-
 # vim:set ft=dockerfile:
 FROM debian:stretch-slim
 

@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: mysql-master
+  labels:
+    name: mysql-master
+spec:
+  replicas: 1
+  selector:
+    name: mysql-master
+  template:
+    metadata:
+      labels:
+        name: mysql-master
+ 
+spec:
+  containers:
+    - name: master
+     image: mysql_master:v5.6
+    ports:
+      - containerPort: 3306
+    volumeMounts:
+      - name: mysql-data
+      mountPath: /data/mysql
+    env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: 'password'
+      - name: MYSQL_REPLICATION_USER
+        value: 'slave'
+      - name: MYSQL_REPLICATION_PASSWORD
+        value: 'password'
+      - name: MYSQL_USER
+        value: 'esaude'
+      - name: MYSQL_PASSWORD
+        value: 'esaude'
+      - name: MYSQL_DATABASE
+        value: 'xipamanine'
+    volumes:
+      - name: mysql-data
+        hostPath:
+        path: /data/mysql
+
+           
