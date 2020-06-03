@@ -354,7 +354,7 @@ _main() {
         # Replication staff
 		echo "CREATE USER '$MYSQL_REPLICATION_USER'@'%' IDENTIFIED BY '$MYSQL_REPLICATION_PASSWORD' ;" | "${mysql[@]}"
 		echo "GRANT REPLICATION SLAVE ON *.* TO '$MYSQL_REPLICATION_USER'@'%' IDENTIFIED BY '$MYSQL_REPLICATION_PASSWORD' ;" | "${mysql[@]}"
-		echo 'FLUSH PRIVILEGES ;' | "${mysql[@]}"
+		echo "FLUSH PRIVILEGES ;" | "${mysql[@]}"
 
 		# there's no database, so it needs to be initialized
 		if [ -z "$DATABASE_ALREADY_EXISTS" ]; then

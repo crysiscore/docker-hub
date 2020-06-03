@@ -41,15 +41,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		perl \
 # install "xz-utils" for .sql.xz docker-entrypoint-initdb.d files
 		xz-utils \
-
 # install net tool
-
         net-tools  \
-
 		 nano   \
-
 		 iputils-ping \
-
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN set -ex; \
@@ -92,7 +87,8 @@ VOLUME /var/lib/mysql
 
 COPY  my-slave.cnf   /etc/mysql/my.cnf
 
-#RUN RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})" && sed -i '/\[mysqld\]/a server-id='$RAND'\'  /etc/mysql/my.cnf
+#RUN RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})" && sed -i '/\[mysqld\]/a server-id='$RAND'/'  /etc/mysql/my.cnf
+# RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})"   && sed -i '/\[mysqld\]/a server-id='$RAND''  /etc/mysql/my.cnf
 
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat

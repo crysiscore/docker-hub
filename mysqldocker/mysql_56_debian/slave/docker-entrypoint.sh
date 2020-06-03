@@ -331,6 +331,8 @@ _main() {
 		set -- mysqld "$@"
 	fi
 
+    RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})"   && sed -i '/\[mysqld\]/a server-id='$RAND''  /etc/mysql/my.cnf
+
 	# skip setup if they aren't running mysqld or want an option that stops mysqld
 	if [ "$1" = 'mysqld' ] && ! _mysql_want_help "$@"; then
 		mysql_note "Entrypoint script for MySQL Server ${MYSQL_VERSION} started."
@@ -338,6 +340,8 @@ _main() {
 		mysql_check_config "$@"
 		# Load various environment variables
 		docker_setup_env "$@"
+
+
 		docker_create_db_directories
 
 		# If container is started as root user, restart as dedicated mysql user

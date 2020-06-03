@@ -69,9 +69,21 @@ docker run -d \
 docker network create --subnet=172.18.0.0/16 mynet_docker
 docker network create --subnet=172.16.0.0/16 mynet_docker_replication
 
+****8 start master and slave 
+
+# ***************** disconnect container from network ************************#
+
+docker stop  mysql_server_master mysql_server_slave_1 mysql_server_slave_2
+docker network disconnect mynet_docker_replication mysql_server_master 
+docker network disconnect mynet_docker mysql_server_slave_1 
+docker network disconnect mynet_docker mysql_server_slave_2 
+
+
+docker start mysql_server_master  postgres_server mysql_server_slave_1 mysql_server_slave_2
+
+
 docker network connect mynet_docker  mysql_server_slave_1
 docker network connect mynet_docker  mysql_server_slave_2
-
 docker network connect mynet_docker_replication  mysql_server_master
 
 ###########################  OpenMRS_SERVER     ############# ######################
@@ -86,17 +98,16 @@ docker run -d \
 	-v /home/agnaldo/Documents/openmrs/backups:/data \
      openmrs:v1.11.6 
 
+
+# *********** porto  **************************** #
+docker run -d \
+    --name porto \
+    -p 8092:8080 \
+	--net mynet_docker \
+	--ip 172.18.0.8 \
+	-v /home/agnaldo/Documents/openmrs/backups:/data \
+     openmrs:v1.11.6 
 #################################################
-docker run --name albazine        -d -p 8081:8080 openmrs:v1.11.6    
-docker run --name openmrs_reports -d -p 8082:8080 openmrs:v1.11.6 
-docker run --name inhagoia        -d -p 8083:8080 openmrs:v1.11.6   
-docker run --name catembe         -d -p 8084:8080 openmrs:v1.11.6   
-docker run --name 1maio           -d -p 8085:8080 openmrs:v1.11.6  
-docker run --name polanacanico    -d -p 8086:8080 openmrs:v1.11.6  
-docker run --name junho           -d -p 8087:8080 openmrs:v1.11.6  
-docker run --name jmcs            -d -p 8088:8080 openmrs:v1.11.6  
-docker run --name porto           -d -p 8089:8080 openmrs:v1.11.6  
-docker run --name jmhg            -d -p 8090:8080 openmrs:v1.11.6  
 
 chmod 0444 cfg/mysql-5.7/my.cnf
 docker start postgres_server mysql_server   

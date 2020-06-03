@@ -11,11 +11,8 @@
 
 [mysqld]
 
-
 bind-address =0.0.0.0
 
-
-server-id               = 2
 # id for master in master-slave configuration
 #relay-log               =mysql-relay-bin.log
 log_bin                 =mysql-bin.log

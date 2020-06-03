@@ -33,15 +33,15 @@ log_bin                 =mysql-bin.log
 
 # Quais base de dados se vai replicar
 binlog_do_db            =openmrs
-#binlog_do_db            =magoanine
-#binlog_do_db            =maio
-#binlog_do_db            =xipamanine
-#binlog_do_db            =porto
-#binlog_do_db            =albazine
-#binlog_do_db            =bagamoio
-#binlog_do_db            =canico
-#binlog_do_db            =magoanine
-#binlog_do_db            =jmcs
+binlog_do_db            =magoanine
+binlog_do_db            =maio
+binlog_do_db            =xipamanine
+binlog_do_db            =porto
+binlog_do_db            =albazine
+binlog_do_db            =bagamoio
+binlog_do_db            =canico
+binlog_do_db            =magoanine
+binlog_do_db            =jmcs
 
 max_allowed_packet=3G
 
