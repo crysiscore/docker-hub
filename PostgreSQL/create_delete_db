@@ -47,8 +47,6 @@ pg_restore -Upostgres -d  bagamoio < /data/bagamoio/BackUpIdartBagamoiohoje.back
 pg_restore -Upostgres -d  farmac_jardim < /data/farmac_jardim/Farmac_Jardim18042020.backup
 pg_restore -Upostgres -d  farmac_magoanine < /data/farmac_backups/farmacMagoanine/pharm202001101400.sql
 psql -Upostgres -d  efila < /data/efila_padronizado/eFilaNewInstalationCleanDB.backup 
-
 pg_restore -Upostgres -d jmcs < /data/jmcs/josemacamo.backup
-
 psql -Upostgres -d  canico < /data/canico/pharm202004151300.sql
 psql -Upostgres -d  magoanine < /data/magoanine/pharm202001101400.sql

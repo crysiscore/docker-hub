@@ -14,7 +14,7 @@
 bind-address =0.0.0.0
 
 # id for master in master-slave configuration
-#relay-log               =mysql-relay-bin.log
+relay-log               =mysql-relay-bin.log
 log_bin                 =mysql-bin.log
 
 max_allowed_packet=3G

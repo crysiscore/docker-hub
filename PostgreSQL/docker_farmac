@@ -11,34 +11,6 @@ $ docker run -d \
     -e POSTGRES_PASSWORD=iD@rt2020 \
     postgres:v9.6_farmac
 
+psql -Ufarmac -p5455 -h197.249.6.156 -dpharm  ( iD@rt2020 )
+
 ############################  Docker Commands ##################################################
-# build image from DockerFile
-docker build -t openmrs:v1.11.6 .
-
-# Run cointainer (--rm to remove container on exit)
-docker run --rm --name test -it -p 8080:8080 <container-name>
-
-# publish a container port
-docker run --publish=hostport:containerport ...
-
-
-# remove docker image or container
-docker image/container rm <container-id>/<container-name>
-
-# execute a command in running container
-docker exec -it d395e423268d  /bin/bash
-
-# Docker attach and detach
-docker attach  --detach-keys="<sequence>"  --name pandorafms
-docker attach  --detach-keys="ctrl-a"
-<sequence> -- ctrl-a
-# Container log
-docker logs -f <CONTAINER>
-docker logs --follow  <CONTAINER>
-
-# get os listening ports
-netstat -ltnpa | grep -i --colour LISTEN
-
-
-#create index epts_obs_concept_person on obs (concept_id,person_id);
-

@@ -87,11 +87,16 @@ VOLUME /var/lib/mysql
 
 COPY  my-slave.cnf   /etc/mysql/my.cnf
 
-#RUN RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})" && sed -i '/\[mysqld\]/a server-id='$RAND'/'  /etc/mysql/my.cnf
+RUN chmod g+wrx -R   /etc/mysql
+
+#RUN rm -f  /etc/mysql/mysql.cnf
+#RUN chmod 666  /etc/mysql/my.cnf
+# this will run in entrypoint
 # RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})"   && sed -i '/\[mysqld\]/a server-id='$RAND''  /etc/mysql/my.cnf
 
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
+RUN ["chmod", "+x", "/entrypoint.sh"]
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 3306

@@ -107,6 +107,17 @@ docker run -d \
 	--ip 172.18.0.8 \
 	-v /home/agnaldo/Documents/openmrs/backups:/data \
      openmrs:v1.11.6 
+
+
+
+# *********** bagamoio  **************************** #
+docker run -d \
+    --name bagamoio \
+    -p 8093:8080 \
+	--net mynet_docker \
+	--ip 172.18.0.9 \
+	-v /home/agnaldo/Documents/openmrs/backups:/data \
+     openmrs:v1.11.6 
 #################################################
 
 chmod 0444 cfg/mysql-5.7/my.cnf

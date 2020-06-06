@@ -2,17 +2,21 @@
 set -eo pipefail
 shopt -s nullglob
 
+
 # logging functions
 mysql_log() {
 	local type="$1"; shift
 	printf '%s [%s] [Entrypoint]: %s\n' "$(date --rfc-3339=seconds)" "$type" "$*"
 }
+
 mysql_note() {
 	mysql_log Note "$@"
 }
+
 mysql_warn() {
 	mysql_log Warn "$@" >&2
 }
+
 mysql_error() {
 	mysql_log ERROR "$@" >&2
 	exit 1
@@ -191,6 +195,8 @@ docker_setup_env() {
 	if [ -d "$DATADIR/mysql" ]; then
 		DATABASE_ALREADY_EXISTS='true'
 	fi
+    
+	#RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})"   && sed -i '/\[mysqld\]/a server-id='$RAND''  /etc/mysql/my.cnf
 }
 
 # Execute sql script, passed via stdin
@@ -287,6 +293,20 @@ docker_setup_db() {
 
 		docker_process_sql --database=mysql <<<"FLUSH PRIVILEGES ;"
 	fi
+	
+	## Replication on  slave
+	# Replication on  slave
+	mysql_note "Creating slave configuration..."
+	mysql_note "master_host=${MYSQL_MASTER_SERVICE_HOST}"
+	mysql_note "master_user=${MYSQL_REPLICATION_USER}"
+	mysql_note "master_password=${MYSQL_REPLICATION_PASSWORD}"
+	mysql_note "STOPING SLAVE" 
+	docker_process_sql --database=mysql <<<"STOP SLAVE;" 
+	docker_process_sql --database=mysql <<<"CHANGE MASTER TO master_host='$MYSQL_MASTER_SERVICE_HOST', master_user='$MYSQL_REPLICATION_USER', master_password='$MYSQL_REPLICATION_PASSWORD' ;"
+    mysql_note "STARTING  SLAVE" 
+	docker_process_sql --database=mysql <<<"START SLAVE;" 
+
+
 }
 
 _mysql_passfile() {
@@ -326,12 +346,14 @@ _mysql_want_help() {
 }
 
 _main() {
+
+	
 	# if command starts with an option, prepend mysqld
 	if [ "${1:0:1}" = '-' ]; then
 		set -- mysqld "$@"
 	fi
-
-    RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})"   && sed -i '/\[mysqld\]/a server-id='$RAND''  /etc/mysql/my.cnf
+   
+   #RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})"  && sed -i '/\[mysqld\]/a server-id='$RAND''  /etc/mysql/my.cnf  > /tmp/my.cnf && cat /tmp/my.cnf > /etc/mysql/my.cnf 
 
 	# skip setup if they aren't running mysqld or want an option that stops mysqld
 	if [ "$1" = 'mysqld' ] && ! _mysql_want_help "$@"; then
@@ -343,18 +365,16 @@ _main() {
 
 
 		docker_create_db_directories
-
+  
+        ## Ser random slave id
+        #RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})"  && sed -i '/\[mysqld\]/a server-id='$RAND''  /etc/mysql/mysql.cnf  > my.cnf &&  cat my.cnf > /etc/mysql/mysql.cnf 
+		RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})"  && sed '/\[mysqld\]/a server-id='$RAND''  /etc/mysql/my.cnf  > /tmp/my.cnf &&  cat /tmp/my.cnf > /etc/mysql/my.cnf  
 		# If container is started as root user, restart as dedicated mysql user
 		if [ "$(id -u)" = "0" ]; then
 			mysql_note "Switching to dedicated user 'mysql'"
 			exec gosu mysql "$BASH_SOURCE" "$@"
 		fi
-
-		# Replication on  slave
-		echo "STOP SLAVE;" | "${mysql[@]}"
-		echo "CHANGE MASTER TO master_host='$MYSQL_MASTER_SERVICE_HOST', master_user='$MYSQL_REPLICATION_USER', master_password='$MYSQL_REPLICATION_PASSWORD' ;" | "${mysql[@]}"
-		echo "START SLAVE;" | "${mysql[@]}"
-
+	
 		# there's no database, so it needs to be initialized
 		if [ -z "$DATABASE_ALREADY_EXISTS" ]; then
 			docker_verify_minimum_env

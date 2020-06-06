@@ -292,6 +292,19 @@ docker_setup_db() {
 
 		docker_process_sql --database=mysql <<<"FLUSH PRIVILEGES ;"
 	fi
+
+
+	   # Replication staff
+		  # Replication on  slave
+	    mysql_note "Creating slave user on master ..."
+		mysql_note "MYSQL_REPLICATION_USER=${MYSQL_REPLICATION_USER}"
+		mysql_note "MYSQL_REPLICATION_PASSWORD=${MYSQL_REPLICATION_PASSWORD}"
+
+
+	    docker_process_sql --database=mysql <<< "CREATE USER '$MYSQL_REPLICATION_USER'@'%' IDENTIFIED BY '$MYSQL_REPLICATION_PASSWORD' ;" 
+        docker_process_sql --database=mysql <<< "GRANT REPLICATION SLAVE ON *.* TO '$MYSQL_REPLICATION_USER'@'%' IDENTIFIED BY '$MYSQL_REPLICATION_PASSWORD' ;" 
+	    docker_process_sql --database=mysql <<< "FLUSH PRIVILEGES ;" 
+
 }
 
 _mysql_passfile() {
@@ -351,10 +364,7 @@ _main() {
 			exec gosu mysql "$BASH_SOURCE" "$@"
 		fi
 
-        # Replication staff
-		echo "CREATE USER '$MYSQL_REPLICATION_USER'@'%' IDENTIFIED BY '$MYSQL_REPLICATION_PASSWORD' ;" | "${mysql[@]}"
-		echo "GRANT REPLICATION SLAVE ON *.* TO '$MYSQL_REPLICATION_USER'@'%' IDENTIFIED BY '$MYSQL_REPLICATION_PASSWORD' ;" | "${mysql[@]}"
-		echo "FLUSH PRIVILEGES ;" | "${mysql[@]}"
+     
 
 		# there's no database, so it needs to be initialized
 		if [ -z "$DATABASE_ALREADY_EXISTS" ]; then
