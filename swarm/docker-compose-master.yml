@@ -36,28 +36,3 @@ services:
       replicas: 1
       placement:
         constraints: [node.role == manager]
-
-  mysql_slave:
-    image: crysiscore/mysql_slave:v5.6
-    volumes:
-      - /home/agnaldo/backups:/data
-    environment:
-        MYSQL_ROOT_PASSWORD: password
-        MYSQL_USER: esaude 
-        MYSQL_DATABASE: openmrs
-        MYSQL_PASSWORD: esaude
-        MYSQL_MASTER_SERVICE_HOST: 10.0.3.3
-        MYSQL_REPLICATION_USER: slave 
-        MYSQL_REPLICATION_PASSWORD: password
-    #depends_on:
-    #  - mysql_master
-    networks:
-      - my_swarm_network
-
-    ports:
-     - "3312:3306"  
-    deploy:
-      replicas: 1
-      placement:
-        constraints: [node.role == worker]
-
