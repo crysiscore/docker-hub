@@ -55,7 +55,7 @@ services:
       - my_swarm_network
 
     ports:
-     - "3312:3306"  
+     - "3306:3306"  
     deploy:
       replicas: 1
       placement:

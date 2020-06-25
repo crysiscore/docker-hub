@@ -78,6 +78,7 @@ docker network disconnect mynet_docker_replication mysql_server_master
 docker network disconnect mynet_docker mysql_server_slave_1 
 docker network disconnect mynet_docker mysql_server_slave_2 
 
+docker network disconnect mynet_docker postgres_server
 
 docker start mysql_server_master  postgres_server mysql_server_slave_1 mysql_server_slave_2
 
@@ -85,7 +86,7 @@ docker start mysql_server_master  postgres_server mysql_server_slave_1 mysql_ser
 docker network connect mynet_docker  mysql_server_slave_1
 docker network connect mynet_docker  mysql_server_slave_2
 docker network connect mynet_docker_replication  mysql_server_master
-
+docker network connect mynet_docker postgres_server
 ###########################  OpenMRS_SERVER     ############# ######################
 docker build -t openmrs:v1.11.6  .
 
@@ -115,9 +116,30 @@ docker run -d \
     --name bagamoio \
     -p 8093:8080 \
 	--net mynet_docker \
-	--ip 172.18.0.9 \
+	--ip 172.18.0.4 \
 	-v /home/agnaldo/Documents/openmrs/backups:/data \
      openmrs:v1.11.6 
+
+
+# *********** 1 Maio  **************************** #
+docker run -d \
+    --name maio \
+    -p 8094:8080 \
+	--net mynet_docker \
+	--ip 172.18.0.10 \
+	-v /home/agnaldo/Documents/openmrs/backups:/data \
+     openmrs:v1.11.6 
+
+#  *********** zimpeto  **************************** #
+docker run -d \
+    --name zimpeto \
+    -p 8094:8080 \
+	--net mynet_docker \
+	--ip 172.18.0.11 \
+	-v /home/agnaldo/Documents/openmrs/backups:/data \
+     openmrs:v1.11.6 
+
+
 #################################################
 
 chmod 0444 cfg/mysql-5.7/my.cnf

@@ -1,0 +1,27 @@
+docker build  -t crysiscore/farmac_shinyapp:beta .
+
+
+docker run -d \
+    --name shinyapp \
+    -p 5595:5595 \
+	--ip 172.18.0.100 \
+	-v ~/Git/shinyapp/farmac:/data \
+     crysiscore/farmac_shinyapp:beta 
+
+
+How to use this image
+Interactive R
+Launch R directly for interactive work:
+
+$ docker run -ti --rm r-base
+Batch mode
+Link the working directory to run R batch commands. We recommend specifying a non-root user when linking a volume to the container to avoid permission changes, as illustrated here:
+
+$ docker run -ti --rm -v "$PWD":/home/docker -w /home/docker -u docker r-base R CMD check .
+Alternatively, just run a bash session on the container first. This allows a user to run batch commands and also edit and run scripts:
+
+$ docker run -ti --rm r-base bash
+$ vim.tiny myscript.R
+Write the script in the container, exit vim and run Rscript
+
+$ Rscript myscript.R
