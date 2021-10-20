@@ -1,5 +1,7 @@
 
-###########################   PostgreSQL      ##########################
+ docker start mysql_server_master postgres_server
+# 
+##########################   PostgreSQL      ##########################
 docker build -t postgres:v9.6 .
 
 $ docker run -d \
@@ -17,7 +19,7 @@ docker build   -t crysiscore/mysql_master:v5.6  .
 
 docker run -d \
     --name mysql_server_master \
-    -p 3306:3306 \
+    -p 5457:3306 \
     -e MYSQL_USER=esaude \
     -e MYSQL_PASSWORD=esaude \
 	-e MYSQL_DATABASE=openmrs \
@@ -69,7 +71,7 @@ docker run -d \
 docker network create --subnet=172.18.0.0/16 mynet_docker
 docker network create --subnet=172.16.0.0/16 mynet_docker_replication
 
-****8 start master and slave 
+**** start master and slave 
 
 # ***************** disconnect container from network ************************#
 
@@ -85,67 +87,18 @@ docker start mysql_server_master  postgres_server mysql_server_slave_1 mysql_ser
 
 docker network connect mynet_docker  mysql_server_slave_1
 docker network connect mynet_docker  mysql_server_slave_2
-docker network connect mynet_docker_replication  mysql_server_master
+docker network connect mynet_docker  mysql_server_master
 docker network connect mynet_docker postgres_server
+docker network disconnect 
 ###########################  OpenMRS_SERVER     ############# ######################
 docker build -t openmrs:v1.11.6  .
 
-# *********** albazine  **************************** #
-docker run -d \
-    --name albazine \
-    -p 8091:8080 \
-	--net mynet_docker \
-	--ip 172.18.0.7 \
-	-v /home/agnaldo/Documents/openmrs/backups:/data \
-     openmrs:v1.11.6 
-
-
-# *********** porto  **************************** #
-docker run -d \
-    --name porto \
-    -p 8092:8080 \
-	--net mynet_docker \
-	--ip 172.18.0.8 \
-	-v /home/agnaldo/Documents/openmrs/backups:/data \
-     openmrs:v1.11.6 
-
-
-
-# *********** bagamoio  **************************** #
-docker run -d \
-    --name bagamoio \
-    -p 8093:8080 \
-	--net mynet_docker \
-	--ip 172.18.0.4 \
-	-v /home/agnaldo/Documents/openmrs/backups:/data \
-     openmrs:v1.11.6 
-
-
-# *********** 1 Maio  **************************** #
-docker run -d \
-    --name maio \
-    -p 8094:8080 \
-	--net mynet_docker \
-	--ip 172.18.0.10 \
-	-v /home/agnaldo/Documents/openmrs/backups:/data \
-     openmrs:v1.11.6 
-
-#  *********** zimpeto  **************************** #
-docker run -d \
-    --name zimpeto \
-    -p 8094:8080 \
-	--net mynet_docker \
-	--ip 172.18.0.11 \
-	-v /home/agnaldo/Documents/openmrs/backups:/data \
-     openmrs:v1.11.6 
-
-
-#################################################
+###########################################################################################
 
 chmod 0444 cfg/mysql-5.7/my.cnf
 docker start postgres_server mysql_server   
 
-##########################  MISC  Commands               ###################################
+##########################  MISC  Commands         ############################################
 # build image from DockerFile
 # docker build -t openmrs:v1.11.6 .
 # get os listening ports
@@ -156,3 +109,38 @@ docker start postgres_server mysql_server
 # apt-get install -y nano && nano /root/.OpenMRS/openmrs-runtime.properties
 
 	sed -i -e 's/openmrs_inh_/openmrs_inh_/g' /root/.OpenMRS/openmrs-runtime.properties
+
+
+###########################   MYSQL_SERVER Master     ############# ##############
+docker build   -t crysiscore/mysql_master:v5.6  .
+
+docker run -d \
+    --name mysql_backup_server \
+    -p 5457:3306 \
+    -e MYSQL_USER=esaude \
+    -e MYSQL_PASSWORD=esaude \
+	-e MYSQL_DATABASE=openmrs \
+	-e MYSQL_ROOT_PASSWORD=password  \
+	-v ~/backups_openmrs:/data \
+     crysiscore/mysql_master:v5.6 
+
+
+
+###########################   dhis     ############# ##############
+docker build   -t crysiscore/dhis:v2.31  .
+
+docker run -d \
+    --name ccs_dhis \
+    -p 8080:8080 \
+	-v ~/backups_openmrs:/data \
+     crysiscore/dhis:v2.31 
+
+
+###########################   openmrs v2.3.0     ############# ##############
+docker build   -t openmrs:v2.3.0  .
+
+docker run -d \
+    --name openmrs_v23 \
+    -p 8090:8080 \
+	-v ~/Documents/openmrs/backups:/data \
+     openmrs:v2.3.0  

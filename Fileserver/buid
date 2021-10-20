@@ -1,0 +1,21 @@
+docker build -t crysiscore/alpine-sshd:7.5 . 
+
+# usage 
+docker run -d \
+    --name fileserver \
+    -p 5456:22 \
+	-v /home/agnaldo/Documents:/data \
+     crysiscore/alpine-sshd:7.5   
+     
+# server
+docker run -d \
+    --name fileserver \
+    -p 5456:22 \
+	-v /home/ccsadmin/backups_idart:/data \
+     crysiscore/alpine-sshd:7.5  
+
+ssh root@localhost -p 5456
+scp -P 5456 Dockerfile root@localhost:/data/Dockerfile  
+
+# The root password is "iD@rt2020".
+

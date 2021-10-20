@@ -1,11 +1,20 @@
 docker build  -t crysiscore/farmac_shinyapp:beta .
-
+docker stop shinyapp
+docker container rm shinyapp
 
 docker run -d \
     --name shinyapp \
     -p 5595:5595 \
+    --net mynet_docker \
 	--ip 172.18.0.100 \
 	-v ~/Git/shinyapp/farmac:/data \
+     crysiscore/farmac_shinyapp:beta 
+
+-- Deploy
+docker run -d \
+    --name shinyapp \
+    -p 5595:5595 \
+	-v /home/ccsadmin/farmac/farmac-shiny-app:/data \
      crysiscore/farmac_shinyapp:beta 
 
 
@@ -13,7 +22,7 @@ How to use this image
 Interactive R
 Launch R directly for interactive work:
 
-$ docker run -ti --rm r-base
+$ docker run -ti --rm shinyapp
 Batch mode
 Link the working directory to run R batch commands. We recommend specifying a non-root user when linking a volume to the container to avoid permission changes, as illustrated here:
 
@@ -25,3 +34,12 @@ $ vim.tiny myscript.R
 Write the script in the container, exit vim and run Rscript
 
 $ Rscript myscript.R
+library(shiny)
+
+runApp(appDir = '/data',
+ port = 5595,
+  launch.browser = FALSE,
+  host = "0.0.0.0",
+  quiet = FALSE, 
+  display.mode = "auto",
+  test.mode = FALSE )

@@ -1,0 +1,34 @@
+{
+	"folders": [
+		{
+			"path": "../py-dhis-data-entry"
+		},
+		{
+			"path": "../../misc/monitorar-backups-openmrs"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../Mozart"
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"mysqlOptions": {
+					"authProtocol": "default"
+				},
+				"previewLimit": 500,
+				"server": "localhost",
+				"port": 3306,
+				"driver": "MySQL",
+				"name": "reports-xipamanine",
+				"group": "Docker",
+				"database": "xipamanine",
+				"username": "esaude",
+				"password": "esaude"
+			}
+		]
+	}
+}

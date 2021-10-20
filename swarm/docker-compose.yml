@@ -17,7 +17,7 @@ services:
   mysql_master:
     image: crysiscore/mysql_master:v5.6
     volumes:
-      - /home/agnaldo/Documents/openmrs/backups:/data
+      - /home/ccsadmin/openmrs/backups:/data
     environment:
         MYSQL_ROOT_PASSWORD: password
         MYSQL_USER: esaude 
@@ -26,7 +26,7 @@ services:
         MYSQL_REPLICATION_USER: slave
         MYSQL_REPLICATION_PASSWORD: password
     ports:
-      - "3310:3306"   
+      - "3306:3306"   
 
     networks:
       my_swarm_network:
@@ -40,7 +40,7 @@ services:
   mysql_slave:
     image: crysiscore/mysql_slave:v5.6
     volumes:
-      - /home/agnaldo/backups:/data
+      - /home/ccsadmin/backups/openmrs:/data
     environment:
         MYSQL_ROOT_PASSWORD: password
         MYSQL_USER: esaude 
@@ -55,9 +55,9 @@ services:
       - my_swarm_network
 
     ports:
-     - "3306:3306"  
+     - "3310:3306"  
     deploy:
       replicas: 1
-      placement:
+      #placement:
         constraints: [node.role == worker]
 
