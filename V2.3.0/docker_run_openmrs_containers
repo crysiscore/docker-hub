@@ -63,7 +63,28 @@ docker run -d  --name upgrade -p 8102:8080 -v /home/openmrs-docker-2x:/data  cry
 # ********************** Nova instancia docker  porta 8103 em diante*******************#
 docker run -d  --name upgrade -p 8103:8080 -v /home/openmrs-docker-2x:/data  crysiscore/openmrs:v2.3.3
 
+#  *********** hpi **************************** #
+docker run -d  --name hpi -p 8104:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
 
+
+#  *********** incassane **************************** #
+docker run -d  --name incassane -p 8105:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** inhagoia **************************** #
+docker run -d  --name inhagoia -p 8106:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** magoaninetendas **************************** #
+docker run -d  --name magoaninetendas -p 8107:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** pescadores **************************** #
+docker run -d  --name pescadores -p 8108:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** mavalane_hg_a **************************** #
+docker run -d  --name mavalane_hg_a -p 8109:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+
+#  *********** mavalane_hg_p **************************** #
+docker run -d  --name mavalane_hg_p -p 8110:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
 
 #####################P Passos de configuracao  #######################################
 # Step 1 
@@ -128,4 +149,6 @@ sudo pico /etc/nginx/conf.d/default.conf #  adicionar um bloco location para a U
 # Step 9 no host para o container
 # carregar o proxy
  sudo nginx -s reload
+
+p@$$w0r4
 
