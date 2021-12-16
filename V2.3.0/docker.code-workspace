@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../Mozart"
+		},
+		{
+			"path": "../../ccs-openmrs-reports"
+		}
+	],
+	"settings": {}
+}

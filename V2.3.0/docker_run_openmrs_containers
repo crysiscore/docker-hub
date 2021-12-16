@@ -1,5 +1,4 @@
 
-
 #  *********** porto  **************************** #
 docker run -d     --name porto     -p 8081:8080 	-v /home/ccsadmin/openmrs/backups:/data     crysiscore/openmrs:v2.3.3
 #  *********** junho  **************************** #
@@ -66,7 +65,6 @@ docker run -d  --name upgrade -p 8103:8080 -v /home/openmrs-docker-2x:/data  cry
 #  *********** hpi **************************** #
 docker run -d  --name hpi -p 8104:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
 
-
 #  *********** incassane **************************** #
 docker run -d  --name incassane -p 8105:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
 
@@ -86,9 +84,13 @@ docker run -d  --name mavalane_hg_a -p 8109:8080 -v /home/ccsadmin/openmrs/backu
 #  *********** mavalane_hg_p **************************** #
 docker run -d  --name mavalane_hg_p -p 8110:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
 
+
+#  *********** romao **************************** #
+docker run -d  --name romao -p 8111:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
 #####################P Passos de configuracao  #######################################
 # Step 1 
-docker exec -it nome_nova_instancia bash
+docker exec -it romao bash
 
 # Step 2
 
@@ -110,27 +112,27 @@ source  ~/.bashrc
 # copiar o ficherio openmrs-runtime.properties   para a pasta  /var/lib/tomcat8/bin  e mudar o nome   nome_nova_instancia para o corresponder o nome da us
 # modificar os parametros de conexao da BD instancia docker na porta 3306
 
-cp /root/.OpenMRS/openmrs-runtime.properties  /var/lib/tomcat8/bin/ nome_nova_instancia-runtime.properties
+cp /root/.OpenMRS/openmrs-runtime.properties  /var/lib/tomcat8/bin/romao-runtime.properties
 
 
 # Step 5 no terminal 
 
 cd  /var/lib/tomcat8/bin
-pico nome_nova_instancia-runtime.properties  # mudar o nome   nome_nova_instancia para o corresponder o nome da us
+pico romao-runtime.properties  # mudar o nome   nome_nova_instancia para o corresponder o nome da us
 cd ../webapps/
-cp openmrs.war  nome_nova_instancia.war
+cp openmrs.war  romao.war
 rm -rf openmrs*
 
 # esperar alguns seg para o tomcat fazer o deploy do  nome_nova_instancia.war
 
-pico nome_nova_instancia/WEB-INF/web.xml
+pico romao/WEB-INF/web.xml
 
 # copiar este texto para linha abaixo do bloco <param-name>log4jRefreshInterval</param-name>
  # mudar o nome   nome_nova_instancia para o corresponder o nome da us
 <context-param>
 
                   <param-name>webAppRootKey</param-name>
-                  <param-value>nome_nova_instancia</param-value>
+                  <param-value>romao</param-value>
 </context-param>
 
 # save ctrl+o
@@ -138,10 +140,10 @@ pico nome_nova_instancia/WEB-INF/web.xml
 exit
 
 # Step 7 no host para o container
-docker stop nome_nova_instancia
+docker stop romao
 
 
-# Step 8 no host actualizar o servidor proxy para rotear requests que vem com o nome da nome_nova_instancia para o docker correspondente ( o que acabamos de cirar)
+# Step 8 no host actualizar o servidor proxy para rotear requests que vem com o nome da nome_nova_instancia para o docker correspondente ( o que acabamos de criar)
 
 sudo pico /etc/nginx/conf.d/default.conf #  adicionar um bloco location para a US
 
@@ -150,5 +152,4 @@ sudo pico /etc/nginx/conf.d/default.conf #  adicionar um bloco location para a U
 # carregar o proxy
  sudo nginx -s reload
 
-p@$$w0r4
-
+docker start dhis  mysql_backup_server  mysql_replica_for_openmrs
