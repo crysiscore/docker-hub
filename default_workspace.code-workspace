@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../ccs-openmrs-reports"
+		},
+		{
+			"path": "V2.3.0"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}

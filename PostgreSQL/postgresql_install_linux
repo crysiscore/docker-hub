@@ -11,7 +11,26 @@ su - postgres && psql
 
 \du
 \l
-alter user postgres with password 'postgres';
+alter user postgres with password '@Dh15ccs2020';
+alter user farmac with password 'iD@rt2020';
+grant all privileges on database pharm to farmac;
+ALTER USER farmac WITH SUPERUSER;
+create user dhis with encrypted password '@Dh15ccs2020';
+grant all privileges on database dhis2 to dhis;
+ALTER USER dhis WITH SUPERUSER;
+
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO farmac;
+
+-- repeat code below for each database:
+
+GRANT CONNECT ON DATABASE pharm to farmac; p@ssw0r6
+\c pharm
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO farmac; 
+GRANT USAGE ON SCHEMA public to farmac; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO farmac;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO farmac;
+
 
 #### configurar parametros de conexao para o postgres
 
@@ -30,20 +49,4 @@ por baixo de # IPv4 local connections:
 
 update-rc.d postgresql defaults
 
-########## Correr o script no postgresql para actualizar todas prescricoes de modo a ter o 'Clinico Generico'
-(o id pode variar de us para us na tabela doctor )
 
-UPDATE public.prescription
-   SET doctor=36748
- WHERE doctor !=36748;
-
-
-
-
- ABC+AZT+3TC+LPV/r '106e650c-0fe3-4193-acb4-74afe900382a'
-
- AZT+3TC+ABC  	3e7f46c7-a971-4c0c-82aa-a65589fd518e
-
- AZT+3TC+DTG 9cb63f72-4c08-4543-878a-537dcabe5670
-
- TDF+ABC+3TC+LPV/r   	71fd3c9a-8e9c-4f1f-ad85-4f979e59dbd1

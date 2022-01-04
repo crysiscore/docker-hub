@@ -1,0 +1,41 @@
+create database magoanine;
+
+find . -type f -exec sed -i -e 's/chamanculo/maio/g' {} \;
+create database maio;
+
+create database xipamanine;
+
+cp chamanculo.war xipamanine.war
+cp -r chamanculo  xipamanine
+cd xipamanine/WEB-INF/
+find . -type f -exec sed -i -e 's/172.17.0.1/172.18.0.2/g' {} \;
+cd ../../
+
+create database porto;
+create database albazine;
+create database bagamoio;
+create database canico;
+create database josemacamo_hg;
+create database josemacamo_cs;
+create database junho;
+create database cimento;
+create database mavalane_cs;
+create database mavalane_hg;
+create database katembe;
+create database inhaca;
+create database hulene;
+create database pescadores;
+create database romao;
+create database altomae;
+create database hpi;
+create database inhagoia;
+create database magoanine_tenda;
+create database zimpeto;
+create database incassane;
+create database chamanculo;
+create database maxaquene;
+create database hcm_ped;
+create database malhangalene;
+create database inhagoia;
+
+

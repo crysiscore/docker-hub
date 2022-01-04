@@ -1,0 +1,37 @@
+
+###########################   MYSQL_SERVER     ############# ##############
+docker pull crysiscore/mysql_master:v5.6  
+
+docker run -d \
+    --name mysql_replica_for_openmrs \
+    -p 5457:3306 \
+    -e MYSQL_USER=esaude \
+    -e MYSQL_PASSWORD=esaude \
+	-e MYSQL_DATABASE=openmrs \
+	-e MYSQL_ROOT_PASSWORD=password  \
+	-v /home/ccsadmin/openmrs/backups:/data \
+     crysiscore/mysql_master:v5.6 
+
+
+
+     docker run -d \
+    --name mysql_replica_for_openmrs \
+    -p 3306:3306 \
+    -e MYSQL_USER=esaude \
+    -e MYSQL_PASSWORD=esaude \
+	-e MYSQL_DATABASE=openmrs \
+	-e MYSQL_ROOT_PASSWORD=password  \
+	-v /data_ssd_1:/data \
+     crysiscore/mysql_master:v5.6 
+
+
+
+docker run -d \
+--name mzrt_polanacanico \
+-p 3306:3306 \
+-e MYSQL_USER=esaude \
+-e MYSQL_PASSWORD=esaude \
+-e MYSQL_DATABASE=openmrs \
+-e MYSQL_ROOT_PASSWORD=password  \
+-v ~/:/data \
+crysiscore/mysql_master:v5.6 

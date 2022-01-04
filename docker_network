@@ -17,9 +17,3 @@ $ docker run --rm -it --net iptastic --ip 203.0.113.2 nginx
 # curl the ip from any other place (assuming this is a public ip block duh)
 $ curl 203.0.113.2
 
-# BOOM golden
-
-
-700 
-120 
-
