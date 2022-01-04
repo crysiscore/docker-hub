@@ -1,2 +1,2 @@
-#export JAVA_OPTS="-Dfile.encoding=UTF-8 -Xms512m -Xmx1024m  -server"
-export JAVA_OPTS="-Dfile.encoding=UTF-8 -Xms2048m -Xmx4096m -XX:PermSize=2056m -XX:MaxPermSize=2056m -XX:-UseGCOverheadLimit -XX:+UseParallelGC  -server"
+export JAVA_OPTS="-Dfile.encoding=UTF-8 -Xms2048m -Xmx8192m -XX:PermSize=1536m -XX:MaxPermSize=1536m -Duser.timezone=Africa/Maputo -XX:-UseGCOverheadLimit -XX:+UseParallelGC  -server"
+export OPENMRS_RUNTIME_PROPERTIES_FILE='/usr/local/tomcat/openmrs-runtime.properties'
