@@ -1,4 +1,5 @@
 
+
 #  *********** porto  **************************** #
 docker run -d     --name porto     -p 8081:8080 	-v /home/ccsadmin/openmrs/backups:/data     crysiscore/openmrs:v2.3.3
 #  *********** junho  **************************** #
@@ -9,8 +10,6 @@ docker run -d     --name polana_canico     -p 8083:8080 	-v /home/ccsadmin/openm
 docker run -d     --name xipamanine     -p 8084:8080 	-v /home/ccsadmin/openmrs/backups:/data     crysiscore/openmrs:v2.3.3
 #  *********** 1_maio  **************************** #
 docker run -d     --name 1_maio     -p 8085:8080 	-v /home/ccsadmin/openmrs/backups:/data     crysiscore/openmrs:v2.3.3
-#  *********** 1_junho  **************************** #
-docker run -d     --name 1_junho     -p 8086:8080 	-v /home/ccsadmin/openmrs/backups:/data     crysiscore/openmrs:v2.3.3
 #  *********** josemacamo_cs  **************************** #
 docker run -d     --name josemacamo_cs     -p 8087:8080 	-v /home/ccsadmin/openmrs/backups:/data     crysiscore/openmrs:v2.3.3
 #  *********** josemacamo_hg **************************** #
@@ -50,47 +49,49 @@ docker run -d  --name magoanine_a -p 8098:8080 -v /home/ccsadmin/openmrs/backups
 #  *********** mavalane_cs **************************** #
 docker run -d  --name mavalane_cs -p 8099:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
 
+
 #  *********** inhaca **************************** #
 docker run -d  --name inhaca -p 8100:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
 
 #  *********** catembe **************************** #
 docker run -d  --name catembe -p 8101:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
 
-#  *********** upgrade **************************** #
-docker run -d  --name upgrade -p 8102:8080 -v /home/openmrs-docker-2x:/data  crysiscore/openmrs:v2.3.3
+#  *********** mavalane_hg_a **************************** #
+docker run -d  --name mavalane_hg_a -p 8102:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** mavalane_hg_p **************************** #
+docker run -d  --name mavalane_hg_p -p 8103:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** hcm_ped **************************** #
+docker run -d  --name hcm_ped -p 8104:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** hpi **************************** #
+docker run -d  --name hpi -p 8105:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** incassane **************************** #
+docker run -d  --name incassane -p 8106:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** inhagoia **************************** #
+docker run -d  --name inhagoia -p 8107:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** magoanine_tenda **************************** #
+docker run -d  --name magoanine_tenda -p 8108:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** pescadores **************************** #
+docker run -d  --name pescadores -p 8109:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** romao **************************** #
+docker run -d  --name romao -p 8110:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
+
 
 # ********************** Nova instancia docker  porta 8103 em diante*******************#
 docker run -d  --name upgrade -p 8103:8080 -v /home/openmrs-docker-2x:/data  crysiscore/openmrs:v2.3.3
 
-#  *********** hpi **************************** #
-docker run -d  --name hpi -p 8104:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
 
-#  *********** incassane **************************** #
-docker run -d  --name incassane -p 8105:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
-
-#  *********** inhagoia **************************** #
-docker run -d  --name inhagoia -p 8106:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
-
-#  *********** magoaninetendas **************************** #
-docker run -d  --name magoaninetendas -p 8107:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
-
-#  *********** pescadores **************************** #
-docker run -d  --name pescadores -p 8108:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
-
-#  *********** mavalane_hg_a **************************** #
-docker run -d  --name mavalane_hg_a -p 8109:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
-
-
-#  *********** mavalane_hg_p **************************** #
-docker run -d  --name mavalane_hg_p -p 8110:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
-
-
-#  *********** romao **************************** #
-docker run -d  --name romao -p 8111:8080 -v /home/ccsadmin/openmrs/backups:/data  crysiscore/openmrs:v2.3.3
 
 #####################P Passos de configuracao  #######################################
 # Step 1 
-docker exec -it romao bash
+docker exec -it nome_nova_instancia bash
 
 # Step 2
 
@@ -109,30 +110,30 @@ source  ~/.bashrc
 
 
 # Step 5 no terminal 
-# copiar o ficherio openmrs-runtime.properties   para a pasta  /var/lib/tomcat8/bin  e mudar o nome   nome_nova_instancia para o corresponder o nome da us
+# copiar o ficherio openmrs-runtime.properties   para a pasta  /usr/local/tomcat7/bin  e mudar o nome   nome_nova_instancia para o corresponder o nome da us
 # modificar os parametros de conexao da BD instancia docker na porta 3306
 
-cp /root/.OpenMRS/openmrs-runtime.properties  /var/lib/tomcat8/bin/romao-runtime.properties
+cp /root/.OpenMRS/openmrs-runtime.properties  /usr/local/tomcat7/bin nome_nova_instancia-runtime.properties
 
 
 # Step 5 no terminal 
 
-cd  /var/lib/tomcat8/bin
-pico romao-runtime.properties  # mudar o nome   nome_nova_instancia para o corresponder o nome da us
+cd  /usr/local/tomcat7/bin
+pico nome_nova_instancia-runtime.properties  # mudar o nome   nome_nova_instancia para o corresponder o nome da us
 cd ../webapps/
-cp openmrs.war  romao.war
+cp openmrs.war  nome_nova_instancia.war
 rm -rf openmrs*
 
 # esperar alguns seg para o tomcat fazer o deploy do  nome_nova_instancia.war
 
-pico romao/WEB-INF/web.xml
+pico nome_nova_instancia/WEB-INF/web.xml
 
 # copiar este texto para linha abaixo do bloco <param-name>log4jRefreshInterval</param-name>
  # mudar o nome   nome_nova_instancia para o corresponder o nome da us
 <context-param>
 
                   <param-name>webAppRootKey</param-name>
-                  <param-value>romao</param-value>
+                  <param-value>nome_nova_instancia</param-value>
 </context-param>
 
 # save ctrl+o
@@ -140,10 +141,10 @@ pico romao/WEB-INF/web.xml
 exit
 
 # Step 7 no host para o container
-docker stop romao
+docker stop nome_nova_instancia
 
 
-# Step 8 no host actualizar o servidor proxy para rotear requests que vem com o nome da nome_nova_instancia para o docker correspondente ( o que acabamos de criar)
+# Step 8 no host actualizar o servidor proxy para rotear requests que vem com o nome da nome_nova_instancia para o docker correspondente ( o que acabamos de cirar)
 
 sudo pico /etc/nginx/conf.d/default.conf #  adicionar um bloco location para a US
 
@@ -152,4 +153,3 @@ sudo pico /etc/nginx/conf.d/default.conf #  adicionar um bloco location para a U
 # carregar o proxy
  sudo nginx -s reload
 
-docker start dhis  mysql_backup_server  mysql_replica_for_openmrs

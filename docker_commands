@@ -137,10 +137,19 @@ docker run -d \
 
 
 ###########################   openmrs v2.3.0     ############# ##############
-docker build   -t openmrs:v2.3.0  .
+docker build   -t openmrs:v2.3.3  .
 
 docker run -d \
     --name openmrs_v23 \
     -p 8090:8080 \
 	-v ~/Documents/openmrs/backups:/data \
      openmrs:v2.3.0  
+
+###########################   openmrs v2.3.3     ############# ##############
+docker build   -t crysiscore/openmrs:v2.3.3  .
+
+docker run -d \
+    --name openmrs_2x \
+    -p 8090:8080 \
+	-v ~/Documents/openmrs/backups:/data \
+     crysiscore/openmrs:v2.3.3
