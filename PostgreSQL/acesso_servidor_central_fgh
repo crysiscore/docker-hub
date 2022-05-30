@@ -4,4 +4,5 @@ ssh his@197.242.174.114 -p2212
 FgHomrs.VM11
 
 
-Marcos ezequiel 2015/00046
+export USER_AT_HOST="admin1@idartmaputo-cid.fgh.org.mz"
+export PUBKEYPATH="$HOME/.ssh/id_rsa.pub"

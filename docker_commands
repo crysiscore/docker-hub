@@ -153,3 +153,13 @@ docker run -d \
     -p 8090:8080 \
 	-v ~/Documents/openmrs/backups:/data \
      crysiscore/openmrs:v2.3.3
+
+
+
+# Container for 
+
+Master Patient index
+docker run --name mysql_master_patient_index    -v /data_ssd_2/mysqldata:/var/lib/mysql   -v /data_ssd_2/mysql_docker:/etc/mysql/conf.d  -e MYSQL_ROOT_PASSWORD=mpi@openmrs   -p 3333:3306    -d   mysql:8.0.27  
+
+    /sbin/shutdown -r now
+  30   5   *   *    1-5   docker  container restart -t 10 openmrs_2x
