@@ -90,7 +90,7 @@ docker run -d  --name romao -p 8111:8080 -v /data_ssd_2/openmrs_config:/data  cr
 
 #####################P Passos de configuracao  #######################################
 # Step 1 
-docker exec -it junho bash
+docker exec -it magoaninetendas bash
 
 # Step 2
 
@@ -113,27 +113,27 @@ source  ~/.bashrc
 # copiar o ficherio openmrs-runtime.properties   para a pasta  /var/lib/tomcat8/bin  e mudar o nome   nome_nova_instancia para o corresponder o nome da us
 # modificar os parametros de conexao da BD instancia docker na porta 3306
 
-mv openmrs-runtime.properties  junho-runtime.properties
+mv openmrs-runtime.properties  magoaninetendas-runtime.properties
 
 
 # Step 5 no terminal 
 # mudar o nome   nome_nova_instancia para o corresponder o nome da us
 
-pico junho-runtime.properties  
+pico magoaninetendas-runtime.properties  
 cd webapps/
-cp openmrs.war  junho.war
+cp openmrs.war  magoaninetendas.war
 rm -rf openmrs*
 
 # esperar alguns seg para o tomcat fazer o deploy do  nome_nova_instancia.war
 
-pico junho/WEB-INF/web.xml
+pico magoaninetendas/WEB-INF/web.xml
 
 # copiar este texto para linha abaixo do bloco <param-name>log4jRefreshInterval</param-name>
  # mudar o nome   nome_nova_instancia para o corresponder o nome da us
 <context-param>
 
                   <param-name>webAppRootKey</param-name>
-                  <param-value>junho</param-value>
+                  <param-value>magoaninetendas</param-value>
 </context-param>
 
 # save ctrl+o
@@ -141,7 +141,7 @@ pico junho/WEB-INF/web.xml
 exit
 
 # Step 7 no host para o container
-docker stop junho
+docker stop magoaninetendas
 
 
 # Step 8 no host actualizar o servidor proxy para rotear requests que vem com o nome da nome_nova_instancia para o docker correspondente ( o que acabamos de criar)
