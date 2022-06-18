@@ -1,0 +1,19 @@
+docker network create --subnet=172.18.0.0/16 mynet_docker
+docker run --net mynet_docker --ip 172.17.0.2 -it datawarehouse bash
+
+
+ip addr
+Additionally you could use
+
+--hostname to specify a hostname
+--add-host to add more entries to /etc/hosts
+
+ create a new bridge network with your subnet and gateway for your ip block
+$ docker network create --subnet 203.0.113.0/24 --gateway 203.0.113.254 iptastic
+
+# run a nginx container with a specific ip in that block
+$ docker run --rm -it --net iptastic --ip 203.0.113.2 nginx
+
+# curl the ip from any other place (assuming this is a public ip block duh)
+$ curl 203.0.113.2
+

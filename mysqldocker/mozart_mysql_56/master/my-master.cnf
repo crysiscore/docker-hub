@@ -1,0 +1,69 @@
+# 
+# The MySQL database server configuration file ( for Master node)
+# ***********  MySQL master-slave configuration *****************#
+# create user 'slave'@'%'  IDENTIFIED BY 'password';
+# GRANT REPLICATION SLAVE ON *.* TO 'slave'@'%' IDENTIFIED BY 'password';
+# create user 'esaude'@'%'  IDENTIFIED BY 'esaude';
+# grant all privileges on *.* to 'esaude'@'%';
+
+# Here is entries for some specific programs
+# The following values assume you have at least 32M ram
+
+!includedir /etc/mysql/conf.d/
+
+[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
+
+
+[mysqld]
+
+bind-address =0.0.0.0
+character-set-server=utf8
+collation-server=utf8_general_ci
+
+
+# let mysql default settings
+datadir      =/usr/mysql
+
+# id for master in master-slave configuration
+server-id               = 1
+
+# Note
+# For the greatest possible durability and consistency in a replication setup using InnoDB with transactions,
+# you should use innodb_flush_log_at_trx_commit=1 and sync_binlog=1 in the master my.cnf file.
+sync_binlog=1
+innodb_flush_log_at_trx_commit=1
+
+# This is where the real details of the replication are kept. 
+# The slave is going to copy all of the changes that are registered in the log. 
+log_bin                 =mysql-bin.log
+
+
+max_allowed_packet=3G
+
+innodb_lock_wait_timeout=100
+innodb_buffer_pool_instances=3
+innodb_buffer_pool_size=484M
+innodb_log_file_size=700MB
+innodb_additional_mem_pool_size=500M
+innodb_log_buffer_size=16M
+tmp_table_size=256M
+myisam_sort_buffer_size=64M
+
+key_buffer_size=64M
+read_rnd_buffer_size=16M
+read_buffer_size=4M
+sort_buffer_size=4M
+
+query_cache_type=1
+query_cache_size=32M
+table_open_cache=64
+
+[myisamchk]
+key_buffer_size=256M
+sort_buffer_size=256M
+read_buffer=2M
+write_buffer=2M

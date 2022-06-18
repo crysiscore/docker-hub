@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-master
+spec:
+  containers:
+    - name: master
+      image:  crysiscore/mysql_master:v5.6
+      ports:
+        - containerPort: 3306
+          name: "mysql-port"
+      volumeMounts:
+        - mountPath: "/usr/mysql/data"
+          name: mysql-pv-volume
+      env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: 'password'
+      - name: MYSQL_REPLICATION_USER
+        value: 'slave'
+      - name: MYSQL_REPLICATION_PASSWORD
+        value: 'password'
+      - name: MYSQL_USER
+        value: 'esaude'
+      - name: MYSQL_PASSWORD
+        value: 'esaude'
+      - name: MYSQL_DATABASE
+        value: 'xipamanine'
+
+  volumes:
+    - name: mysql-pv-volume
+      persistentVolumeClaim:
+        claimName: task-mysql-pv-claim
+
+           

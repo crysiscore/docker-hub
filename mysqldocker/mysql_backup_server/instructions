@@ -1,0 +1,55 @@
+
+###########################   MYSQL_SERVER     ############# ##############
+docker pull crysiscore/mysql_master:v5.6  
+
+
+     docker run -d \
+    --name mysql_server_sync \
+    -p 5457:3306 \
+    -e MYSQL_USER=esaude \
+    -e MYSQL_PASSWORD=esaude \
+	-e MYSQL_DATABASE=openmrs \
+	-e MYSQL_ROOT_PASSWORD=password  \
+	-v /data_ssd_1:/data \
+     crysiscore/mysql_master:v5.6 
+
+
+     docker run -d \
+    --name mysql_server_docker_openmrs \
+    -p 3306:3306 \
+    -e MYSQL_USER=esaude \
+    -e MYSQL_PASSWORD=esaude \
+	-e MYSQL_DATABASE=openmrs \
+	-e MYSQL_ROOT_PASSWORD=password  \
+	-v /data_ssd_2:/data \
+     crysiscore/mysql_master:v5.6 
+
+  create database 1_junho;
+  create database 1_maio;
+  create database albasine;
+  create database altomae;
+  create database bagamoio;
+  create database catenbe;
+  create database chamanculo;
+  create database cimento;
+  create database hcm_ped;
+  create database hpi;
+  create database hulene;
+  create database incassane;
+  create database inhaca;
+  create database inhagoia;
+  create database josemacamo;
+  create database josemacamo_hg;
+  create database magoanine_A;
+  create database magoanine_tenda;
+  create database malhangalene;
+  create database mavalane_cs;
+  create database mavalane_hg_a;
+  create database mavalane_hg_p;
+  create database maxaquene;
+  create database pescadores;
+  create database polana_canico;
+  create database porto;
+  create database romao;
+  create database xipamanine;
+  create database zimpeto;

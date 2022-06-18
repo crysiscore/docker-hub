@@ -1,0 +1,52 @@
+#####  postgresql installation linux
+
+sudo apt-get install lsb-release
+ add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main"
+ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+ apt-get update &&   apt-get install postgresql-9.6
+
+###### configurar o password para o user postgres
+
+su - postgres && psql 
+
+\du
+\l
+alter user postgres with password '@Dh15ccs2020';
+alter user farmac with password 'iD@rt2020';
+grant all privileges on database pharm to farmac;
+ALTER USER farmac WITH SUPERUSER;
+create user dhis with encrypted password '@Dh15ccs2020';
+grant all privileges on database dhis2 to dhis;
+ALTER USER dhis WITH SUPERUSER;
+
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO farmac;
+
+-- repeat code below for each database:
+
+GRANT CONNECT ON DATABASE pharm to farmac; p@ssw0r6
+\c pharm
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO farmac; 
+GRANT USAGE ON SCHEMA public to farmac; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO farmac;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO farmac;
+
+
+#### configurar parametros de conexao para o postgres
+
+pico /etc/postgresql/9.6/main/postgresql.conf
+
+mudar a linha
+#listen_addresses = 'localhost' para
+listen_addresses = '*'
+
+pico /etc/postgresql/9.6/main/pg_hba.conf
+addicionar a linha 
+host    all             all             192.168.100.0/24        md5
+por baixo de # IPv4 local connections:
+
+######## inicar postgresql quando o servidor openmrs iniciar
+
+update-rc.d postgresql defaults
+
+

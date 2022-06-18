@@ -1,0 +1,156 @@
+
+#  *********** porto  **************************** #
+docker run -d     --name porto     -p 8081:8080 	-v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+#  *********** junho  **************************** #
+docker run -d     --name junho     -p 8082:8080 	-v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+#  *********** polana_canico  **************************** #https:/github.com/ccssaude/Docker/blob/master/V2.3.0/Dockerfile
+docker run -d     --name polana_canico     -p 8083:8080 	-v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+#  *********** xipamanine  **************************** #
+docker run -d     --name xipamanine     -p 8084:8080 	-v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+#  *********** 1_maio  **************************** #
+docker run -d     --name 1_maio     -p 8085:8080 	-v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+#  *********** 1_junho  **************************** #
+docker run -d     --name 1_junho     -p 8086:8080 	-v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+#  *********** josemacamo_cs  **************************** #
+docker run -d     --name josemacamo_cs     -p 8087:8080 	-v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+#  *********** josemacamo_hg **************************** #
+docker run -d     --name josemacamo_hg     -p 8088:8080 	-v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+#  *********** chamanculo **************************** #
+docker run -d     --name chamanculo     -p 8089:8080 	-v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** zimpeto **************************** #
+docker run -d     --name zimpeto     -p 8090:8080 	-v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** altomae **************************** #
+docker run -d     --name altomae     -p 8091:8080 	-v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** albasine **************************** #
+docker run -d  --name albasine -p 8092:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+
+#  *********** maxaquene **************************** #
+docker run -d  --name maxaquene -p 8093:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+
+#  *********** hulene **************************** #
+docker run -d  --name hulene -p 8094:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** bagamoio **************************** #
+docker run -d  --name bagamoio -p 8095:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** malhangalene **************************** #
+docker run -d  --name malhangalene -p 8096:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** cimento **************************** #
+docker run -d  --name cimento -p 8097:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** magoanine_a **************************** #
+docker run -d  --name magoanine_a -p 8098:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** mavalane_cs **************************** #
+docker run -d  --name mavalane_cs -p 8099:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** inhaca **************************** #
+docker run -d  --name inhaca -p 8100:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** catembe **************************** #
+docker run -d  --name catembe -p 8101:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** upgrade **************************** #
+docker run -d  --name upgrade -p 8102:8080 -v /home/openmrs-docker-2x:/data  crysiscore/openmrs:v2.3.3
+
+# ********************** Nova instancia docker  porta 8103 em diante*******************#
+docker run -d  --name upgrade -p 8103:8080 -v /home/openmrs-docker-2x:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** hpi **************************** #
+docker run -d  --name hpi -p 8104:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** incassane **************************** #
+docker run -d  --name incassane -p 8105:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** inhagoia **************************** #
+docker run -d  --name inhagoia -p 8106:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** magoaninetendas **************************** #
+docker run -d  --name magoaninetendas -p 8107:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** pescadores **************************** #
+docker run -d  --name pescadores -p 8108:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#  *********** mavalane_hg_a **************************** #
+docker run -d  --name mavalane_hg_a -p 8109:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+
+#  *********** mavalane_hg_p **************************** #
+docker run -d  --name mavalane_hg_p -p 8110:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+
+#  *********** romao **************************** #
+docker run -d  --name romao -p 8111:8080 -v /data_ssd_2/openmrs_config:/data  crysiscore/openmrs:v2.3.3
+
+#####################P Passos de configuracao  #######################################
+# Step 1 
+docker exec -it magoaninetendas bash
+
+# Step 2
+
+# UTF-8 locales
+apt-get update
+apt-get install -y locales
+dpkg-reconfigure locales
+
+
+# Step 3
+pico ~/.bashrc
+# copiar para o fim  do ficheiro a seguinte linha
+export LC_ALL="en_US.UTF-8"
+
+# Step 4 no terminal 
+source  ~/.bashrc
+
+
+# Step 5 no terminal 
+# copiar o ficherio openmrs-runtime.properties   para a pasta  /var/lib/tomcat8/bin  e mudar o nome   nome_nova_instancia para o corresponder o nome da us
+# modificar os parametros de conexao da BD instancia docker na porta 3306
+
+mv openmrs-runtime.properties  magoaninetendas-runtime.properties
+
+
+# Step 5 no terminal 
+# mudar o nome   nome_nova_instancia para o corresponder o nome da us
+
+pico magoaninetendas-runtime.properties  
+cd webapps/
+cp openmrs.war  magoaninetendas.war
+rm -rf openmrs*
+
+# esperar alguns seg para o tomcat fazer o deploy do  nome_nova_instancia.war
+
+pico magoaninetendas/WEB-INF/web.xml
+
+# copiar este texto para linha abaixo do bloco <param-name>log4jRefreshInterval</param-name>
+ # mudar o nome   nome_nova_instancia para o corresponder o nome da us
+<context-param>
+
+                  <param-name>webAppRootKey</param-name>
+                  <param-value>magoaninetendas</param-value>
+</context-param>
+
+# save ctrl+o
+# Step 6 no terminal 
+exit
+
+# Step 7 no host para o container
+docker stop magoaninetendas
+
+
+# Step 8 no host actualizar o servidor proxy para rotear requests que vem com o nome da nome_nova_instancia para o docker correspondente ( o que acabamos de criar)
+
+sudo pico /etc/nginx/conf.d/default.conf #  adicionar um bloco location para a US
+
+
+# Step 9 no host para o container
+# carregar o proxy
+ sudo nginx -s reload
+
+docker start dhis  mysql_backup_server  mysql_replica_for_openmrs

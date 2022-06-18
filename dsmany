@@ -1,0 +1,29 @@
+#! /bin/bash
+
+<<'COMMENT'
+ * Script para facilitar a inicializcao de varios containers docker
+ * @param  containerName  o nome do container a inicializar
+ * @example dstarmany albazine 1maio maxaquene containerName
+COMMENT
+
+if [ $# -eq 0 ]; then
+    echo "Error! No arguments suplied. Please specify container name."
+else
+
+    for container in "$@"; do
+        #Check if container exists
+        if [ ! "$(docker ps -a | grep -w $container)" ]; then
+            echo "Error: No such container: $container"
+        else
+            # If container is alredy running, do nothing.
+            RUNNING=$(docker inspect --format="{{.State.Running}}" $container 2>/dev/null)
+            if [ "$RUNNING" == "true" ]; then
+                echo "Container $container is already running..."
+            else
+                echo "Container $container exists. Starting container"
+                docker start $container
+            fi
+
+        fi
+    done
+fi

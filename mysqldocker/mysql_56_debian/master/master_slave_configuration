@@ -1,0 +1,21 @@
+show master status;
+
++------------------+----------+----------------------------------------------------------------------+------------------+-------------------+
+| File             | Position | Binlog_Do_DB                                                         | Binlog_Ignore_DB | Executed_Gtid_Set |
++------------------+----------+----------------------------------------------------------------------+------------------+-------------------+
+| mysql-bin.000005 |     480  | openmrs,magoanine,maio,porto,albazine,bagamoio,canico,magoanine,jmcs |                  |                   |
++------------------+----------+----------------------------------------------------------------------+------------------+-------------------+
+
+
+CHANGE MASTER TO MASTER_HOST='172.18.0.2',MASTER_USER='slave', MASTER_PASSWORD='password', MASTER_LOG_FILE='mysql-bin.000005', MASTER_LOG_POS=480;
+
++------------------+-----------+-------------------------------------------------------------------------+------------------+-------------------+
+| File             | Position  | Binlog_Do_DB                                                            | Binlog_Ignore_DB | Executed_Gtid_Set |
++------------------+-----------+-------------------------------------------------------------------------+------------------+-------------------+
+| mysql-bin.000035 | 311459948 | magoanine,maio,xipamanine,porto,albazine,bagamoio,canico,magoanine,jmcs |                  |                   |
++------------------+-----------+-------------------------------------------------------------------------+------------------+-------------------+
+
+CHANGE MASTER TO MASTER_HOST='172.18.0.2',MASTER_USER='slave', MASTER_PASSWORD='password', MASTER_LOG_FILE='mysql-bin.000035', MASTER_LOG_POS=311459948;
+
+START SLAVE;
+SHOW SLAVE STATUS\G

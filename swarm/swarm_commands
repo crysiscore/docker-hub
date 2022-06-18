@@ -1,0 +1,45 @@
+docker stack rm  stackdemo
+docker stack deploy --compose-file docker-compose.yml stackdemo
+docker build  -t crysiscore/mysql_slave:v5.6  .
+docker node ps $(docker node ls -q)
+
+ cd ../../../swarm/
+cd ../mysqldocker/mysql_56_debian/slave/
+docker build  -t crysiscore/mysql_slave:v5.6  .
+docker  push crysiscore/mysql_slave:v5.6 
+
+
+cd ../master/
+docker build   -t crysiscore/mysql_master:v5.6  .
+docker  push crysiscore/mysql_master:v5.6  .
+
+
+# run on nodes
+docker pull crysiscore/mysql_slave:v5.6
+
+cd ../../../swarm/
+docker stack deploy --compose-file docker-compose.yml stackdemo
+
+Get detailed info about all containers
+docker node ps $(docker node ls -q) | grep Running
+
+docker node ls | cut -c 31-49 | grep -v HOSTNAME | xargs -I"SERVER" sh -c "echo SERVER; ssh SERVER /usr/local/bin/docker stats --no-stream"
+--------------------------------------
+docker network create \
+  --driver overlay \
+  --ingress \
+  --subnet=10.0.3.0/24 \
+  --gateway=192.168.1.1 \
+my_swarm_network
+
+
+docker network create \
+  --driver overlay \
+  --ingress \
+  --subnet=10.0.3.0/24 \
+my_swarm_network
+
+
+docker stack deploy --compose-file docker-compose.yml cluster
+
+ grant all privileges on *.* to 'esaude'@'%';

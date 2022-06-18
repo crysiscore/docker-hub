@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../dhis"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../ccs-openmrs-reports"
+		}
+	],
+	"settings": {}
+}

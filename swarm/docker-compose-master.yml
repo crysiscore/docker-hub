@@ -1,0 +1,38 @@
+version: "3.5"
+
+networks:
+  my_swarm_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.0.3.0/24"
+
+#networks:
+#  default:
+#    external:
+#      name: my_swarm_network
+
+services:
+ 
+  mysql_master:
+    image: crysiscore/mysql_master:v5.6
+    volumes:
+      - /home/agnaldo/Documents/openmrs/backups:/data
+    environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_USER: esaude 
+        MYSQL_DATABASE: openmrs
+        MYSQL_PASSWORD: esaude
+        MYSQL_REPLICATION_USER: slave
+        MYSQL_REPLICATION_PASSWORD: password
+    ports:
+      - "3310:3306"   
+
+    networks:
+      my_swarm_network:
+        ipv4_address: 10.0.3.3
+
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]

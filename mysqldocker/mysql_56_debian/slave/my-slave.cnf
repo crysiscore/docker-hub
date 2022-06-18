@@ -1,0 +1,94 @@
+# 
+# The MySQL database server configuration file ( for Slave node)
+# ***********  MySQL master-slave configuration *****************#
+# create user 'slave'@'%'  IDENTIFIED BY 'password';
+# GRANT REPLICATION SLAVE ON *.* TO 'slave'@'%' IDENTIFIED BY 'password';
+
+# Here is entries for some specific programs
+# The following values assume you have at least 32M ram
+
+!includedir /etc/mysql/conf.d/
+
+[mysqld]
+
+bind-address =0.0.0.0
+
+# id for master in master-slave configuration
+relay-log               =mysql-relay-bin.log
+log_bin                 =mysql-bin.log
+
+
+#binlog_do_db            =openmrs
+#binlog_do_db            =magoanine
+#binlog_do_db            =maio
+#binlog_do_db            =xipamanine
+#binlog_do_db            =porto
+#binlog_do_db            =albazine
+#binlog_do_db            =bagamoio
+#binlog_do_db            =canico
+#binlog_do_db            =jmhg
+#binlog_do_db            =jmcs
+#binlog_do_db            =junho
+#binlog_do_db            =cimento
+#binlog_do_db            =mavalane
+#binlog_do_db            =mavalanehg
+#binlog_do_db            =katembe
+#binlog_do_db            =inhaca
+#binlog_do_db            =hulene
+#binlog_do_db            =pescadores
+#binlog_do_db            =romao
+#binlog_do_db            =altomae
+#binlog_do_db            =hpi
+#binlog_do_db            =inhagoia
+#binlog_do_db            =magoanine_tenda
+#binlog_do_db            =zimpeto
+#binlog_do_db            =incassane
+#binlog_do_db            =chamanculo
+#binlog_do_db            =maxaquene
+#binlog_do_db            =hcmped
+#binlog_do_db            =malhangalene
+#binlog_do_db            =inhagoia
+
+max_allowed_packet=3G
+
+innodb_lock_wait_timeout=100
+innodb_buffer_pool_instances=3
+innodb_buffer_pool_size=484M
+innodb_log_file_size=700MB
+innodb_additional_mem_pool_size=500M
+innodb_log_buffer_size=16M
+innodb_flush_log_at_trx_commit=1
+tmp_table_size=256M
+myisam_sort_buffer_size=64M
+
+key_buffer_size=64M
+read_rnd_buffer_size=16M
+read_buffer_size=4M
+sort_buffer_size=4M
+
+query_cache_type=1
+query_cache_size=32M
+table_open_cache=64
+
+[myisamchk]
+key_buffer_size=256M
+sort_buffer_size=256M
+read_buffer=2M
+write_buffer=2M
+
+
+# The replication master for this slave - required
+#master-host     =   <hostname>
+#
+# The username the slave will use for authentication when connecting
+# to the master - required
+#master-user     =   <username>
+#
+# The password the slave will authenticate with when connecting to
+# the master - required
+#master-password =   <password>
+#
+# The port the master is listening on.
+# optional - defaults to 3306
+#master-port     =  <port>
+#

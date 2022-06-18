@@ -1,0 +1,66 @@
+
+# build image from DockerFile
+docker build -t mysql:5.6 .
+
+# Run cointainer (--rm to remove container on exit)
+docker run --rm --name test -it -p 8080:8080 <container-name>
+
+# publish a container port
+docker run --publish=hostport:containerport ...
+
+
+# remove docker image or container
+docker image/container rm <container-id>/<container-name>
+
+# execute a command in running container
+docker exec -it ct_name  /bin/bash
+
+# Docker attach and detach
+docker attach  --detach-keys="<sequence>"  --name pandorafms
+docker attach  --detach-keys="ctrl-a"
+<sequence> -- ctrl-a
+# Container log
+docker logs -f <CONTAINER>
+docker logs --follow  <CONTAINER>
+
+# get os listening ports
+netstat -ltnpa | grep -i --colour LISTEN
+
+
+#create index epts_obs_concept_person on obs (concept_id,person_id);
+
+### creating containers for openmrs databases ###
+# parameters -d for detach mode
+#            -it for stdin 
+docker exec -it clean  /bin/bash && \ 
+apt-get install -y vim && vim /root/.OpenMRS/openmrs-runtime.properties 
+
+source schema_sp_export_modified.sql
+create database temp; use temp;
+source  mozart_sp_rmdups.sql;
+create database openmrs; use openmrs; source cs_muele.sql;
+
+
+call temp.proc_remove_dups_buscas();
+call temp.proc_remove_dups_filas();
+call export_db.EXPORTDB();
+
+############################################################################################
+docker run --name datawarehouse  -d  -v ~/Documents/openmrs/backups:/opt/data -p 3310:3306 openmrs 
+&& docker exec -it datawarehouse  /bin/bash 
+
+
+docker run --name reports  -d  -v ~/Documents/openmrs/backups:/opt/data -p 3333:3306 openmrs &&
+ docker exec -it reports  /bin/bash 
+
+
+
+
+
+docker run --name mysql_master_patient_index  \
+  -v /data_ssd_2/mysqldata:/var/lib/mysql \
+  -v /data_ssd_2/mysql_docker:/etc/mysql/conf.d \
+  -e MYSQL_ROOT_PASSWORD=mpi@openmrs \
+  -p 3333:3306  \
+  -d \
+  mysql:8.0.27

@@ -1,0 +1,165 @@
+
+ docker start mysql_server_master postgres_server
+# 
+##########################   PostgreSQL      ##########################
+docker build -t postgres:v9.6 .
+
+$ docker run -d \
+    --name postgres_server \
+    -p 5432:5432 \
+    -e POSTGRES_USERNAME=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+	--net mynet_docker \
+	--ip 172.18.0.3 \
+	-v /home/agnaldo/Documents/iDART:/data \
+     postgresql:9.6 
+
+###########################   MYSQL_SERVER Master     ############# ##############
+docker build   -t crysiscore/mysql_master:v5.6  .
+
+docker run -d \
+    --name mysql_server_master \
+    -p 5457:3306 \
+    -e MYSQL_USER=esaude \
+    -e MYSQL_PASSWORD=esaude \
+	-e MYSQL_DATABASE=openmrs \
+	-e MYSQL_ROOT_PASSWORD=password  \
+	--net mynet_docker \
+	--ip 172.18.0.2 \
+	-v ~/Documents/openmrs/backups:/data \
+     crysiscore/mysql_master:v5.6 
+
+
+###########################   MYSQL_SERVER Slave    ############# ##############
+
+docker build  --no-cache -t crysiscore/mysql_slave:v5.6  . 
+docker build  -t crysiscore/mysql_slave:v5.6  .
+
+
+#### slave 1
+
+docker run -d \
+    --name mysql_server_slave_1 \
+    -p 3307:3306 \
+    -e MYSQL_USER=esaude \
+    -e MYSQL_PASSWORD=esaude \
+	-e MYSQL_ROOT_PASSWORD=password  \
+	--net mynet_docker_replication \
+	--ip 172.16.0.2 \
+	-v ~/Documents/openmrs/backups:/data \
+     crysiscore/mysql_slave:v5.6 
+
+docker network connect mynet_docker  mysql_server_slave
+
+#### slave 1
+docker run -d \
+    --name mysql_server_slave_2 \
+    -p 3308:3306 \
+    -e MYSQL_USER=esaude \
+    -e MYSQL_PASSWORD=esaude \
+	-e MYSQL_ROOT_PASSWORD=password  \
+	--net mynet_docker_replication \
+	--ip 172.16.0.3 \
+	-v ~/Documents/openmrs/backups:/data \
+     crysiscore/mysql_slave:v5.6 
+
+
+
+
+########################  Networking with  DockerFile    #####################
+
+docker network create --subnet=172.18.0.0/16 mynet_docker
+docker network create --subnet=172.16.0.0/16 mynet_docker_replication
+
+**** start master and slave 
+
+# ***************** disconnect container from network ************************#
+
+docker stop  mysql_server_master mysql_server_slave_1 mysql_server_slave_2
+docker network disconnect mynet_docker_replication mysql_server_master 
+docker network disconnect mynet_docker mysql_server_slave_1 
+docker network disconnect mynet_docker mysql_server_slave_2 
+
+docker network disconnect mynet_docker postgres_server
+
+docker start mysql_server_master  postgres_server mysql_server_slave_1 mysql_server_slave_2
+
+
+docker network connect mynet_docker  mysql_server_slave_1
+docker network connect mynet_docker  mysql_server_slave_2
+docker network connect mynet_docker  mysql_server_master
+docker network connect mynet_docker postgres_server
+docker network disconnect 
+###########################  OpenMRS_SERVER     ############# ######################
+docker build -t openmrs:v1.11.6  .
+
+###########################################################################################
+
+chmod 0444 cfg/mysql-5.7/my.cnf
+docker start postgres_server mysql_server   
+
+##########################  MISC  Commands         ############################################
+# build image from DockerFile
+# docker build -t openmrs:v1.11.6 .
+# get os listening ports
+# netstat -ltnpa | grep -i --colour LISTEN
+#
+# create index epts_obs_concept_person on obs (concept_id,person_id);
+#
+# apt-get install -y nano && nano /root/.OpenMRS/openmrs-runtime.properties
+
+	sed -i -e 's/openmrs_inh_/openmrs_inh_/g' /root/.OpenMRS/openmrs-runtime.properties
+
+
+###########################   MYSQL_SERVER Master     ############# ##############
+docker build   -t crysiscore/mysql_master:v5.6  .
+
+docker run -d \
+    --name mysql_backup_server \
+    -p 5457:3306 \
+    -e MYSQL_USER=esaude \
+    -e MYSQL_PASSWORD=esaude \
+	-e MYSQL_DATABASE=openmrs \
+	-e MYSQL_ROOT_PASSWORD=password  \
+	-v ~/backups_openmrs:/data \
+     crysiscore/mysql_master:v5.6 
+
+
+
+###########################   dhis     ############# ##############
+docker build   -t crysiscore/dhis:v2.31  .
+
+docker run -d \
+    --name ccs_dhis \
+    -p 8080:8080 \
+	-v ~/backups_openmrs:/data \
+     crysiscore/dhis:v2.31 
+
+
+###########################   openmrs v2.3.0     ############# ##############
+docker build   -t openmrs:v2.3.3  .
+
+docker run -d \
+    --name openmrs_v23 \
+    -p 8090:8080 \
+	-v ~/Documents/openmrs/backups:/data \
+     openmrs:v2.3.0  
+
+###########################   openmrs v2.3.3     ############# ##############
+docker build   -t crysiscore/openmrs:v2.3.3  .
+
+docker run -d \
+    --name openmrs_2x \
+    -p 8090:8080 \
+	-v ~/Documents/openmrs/backups:/data \
+     crysiscore/openmrs:v2.3.3
+
+
+
+# Container for 
+
+Master Patient index
+docker run --name mysql_master_patient_index    -v /data_ssd_2/mysqldata:/var/lib/mysql   -v /data_ssd_2/mysql_docker:/etc/mysql/conf.d  -e MYSQL_ROOT_PASSWORD=mpi@openmrs   -p 3333:3306    -d   mysql:8.0.27  
+
+    /sbin/shutdown -r now
+  30   5   *   *    1-5   docker  container restart -t 10 openmrs_2x

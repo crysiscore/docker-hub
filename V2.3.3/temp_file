@@ -1,0 +1,20 @@
+
+docker build -t crysiscore/openmrs:v2.3.3  .
+
+
+docker container rm  altomae chamanculo josemacamo_hg junho porto xipamanine maio josemacamo_cs polana_canico albasine maxaquene malhangalene magoanine_a mavalane_cs bagamoio hulene zimpeto cimento 
+docker container rm  altomae chamanculo josemacamo_hg junho porto xipamanine maio josemacamo_cs polana_canico albasine maxaquene malhangalene magoanine_a mavalane_cs bagamoio hulene zimpeto cimento \
+magoanine_tenda inhagoia incassane hpi hcm_ped mavalane_cs mavalane_hg_p mavalane_hg_a catembe inhaca 1_maio romao pescadores 
+
+
+
+export USER_AT_HOST="ccsadmin@192.168.1.10"
+export PUBKEYPATH="$HOME/.ssh/id_rsa.pub"
+ssh-copy-id -p 2214 -i  "$PUBKEYPATH" "$USER_AT_HOST"
+
+
+ssh-copy-id  -i  "$PUBKEYPATH" "$USER_AT_HOST"
+
+ time sed -i '/DELAYED/ s// /g' large file
+
+#eIPccs123#

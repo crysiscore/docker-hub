@@ -1,0 +1,26 @@
+docker pull   crysiscore/debian-postgres:9.6
+
+
+docker run -d \
+    --name postgres_farmac \
+    -p 5455:5432   \
+    -e POSTGRES_USERNAME=pgadmin \
+    -e POSTGRES_PASSWORD=iD@rt2020 \
+    -v /home/ccsadmin/farmac/:/data \
+    crysiscore/debian-postgres:9.6
+
+create database pharm;
+create user farmac with encrypted password 'iD@rt2020';
+grant all privileges on database pharm to farmac;
+ALTER USER farmac WITH SUPERUSER;
+
+
+
+
+docker run -d \
+    --name postgres_farmac \
+    -p 5432:5432 -p 3001:3001   \
+    -e POSTGRES_USERNAME=pgadmin \
+    -e POSTGRES_PASSWORD=iD@rt2020 \
+    -v ~/farmac/:/data \
+    crysiscore/debian-postgres:9.6
