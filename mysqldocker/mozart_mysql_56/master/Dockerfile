@@ -50,13 +50,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
  RUN set -ex; \
 # gpg: key 5072E1F5: public key "MySQL Release Engineering <mysql-build@oss.oracle.com>" imported
-	key='A4A9406876FCBD3C456770C88C718D3B5072E1F5'; \
+	key='3A79BD29'; \
 	export GNUPGHOME="$(mktemp -d)"; \
-	gpg --batch --keyserver keys.openpgp.org --recv-keys "$key"; \
+	gpg --batch --keyserver pgp.mit.edu  --recv-keys "$key"; \
 	gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/mysql.gpg; \
 	gpgconf --kill all; \
 	rm -rf "$GNUPGHOME"; \
 	apt-key list > /dev/null
+
+# RUN set -ex; \
+# gpg: key 5072E1F5: public key "MySQL Release Engineering <mysql-build@oss.oracle.com>" imported
+#	key='A4A9406876FCBD3C456770C88C718D3B5072E1F5'; \
+#	export GNUPGHOME="$(mktemp -d)"; \
+#	gpg --batch --keyserver keys.openpgp.org --recv-keys "$key"; \
+#	gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/mysql.gpg; \
+#	gpgconf --kill all; \
+#	rm -rf "$GNUPGHOME"; \
+#	apt-key list > /dev/null
 
 ENV MYSQL_MAJOR 5.6
 ENV MYSQL_VERSION 5.6.48-1debian9

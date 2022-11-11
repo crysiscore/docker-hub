@@ -1,16 +1,13 @@
 alter user postgres with password '@Dh15ccs2020';
 
 
-
 ################     iDART Central Server
 ssh his@197.242.174.114 -p2212
 FgHomrs.VM11
 
-
 psql -Upostgres -W -p2345 -h127.0.0.1
 
 ALTER USER authenticator WITH SUPERUSER;
-
 
 SELECT 
    patientid,

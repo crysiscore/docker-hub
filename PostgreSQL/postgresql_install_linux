@@ -15,9 +15,28 @@ alter user postgres with password '@Dh15ccs2020';
 alter user farmac with password 'iD@rt2020';
 grant all privileges on database pharm to farmac;
 ALTER USER farmac WITH SUPERUSER;
+
 create user dhis with encrypted password '@Dh15ccs2020';
-grant all privileges on database dhis2 to dhis;
+grant all privileges on database dhis_pepfar to dhis;
 ALTER USER dhis WITH SUPERUSER;
+
+create user denilson  with encrypted password '@Dh15ccs2020';
+grant all privileges on database dhis_pepfar_test_env to denilson;
+GRANT USAGE ON SCHEMA public to denilson; 
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO denilson;
+ALTER USER denilson WITH SUPERUSER;
+
+
+create database ccu_db;
+
+create user smi  with encrypted password 'ccs_ccu';
+GRANT SELECT, update, delete, insert  ON ALL TABLES IN SCHEMA public TO smi;
+grant create, connect, temporary on database   ccu_db to smi;
+grant all privileges on  database ccu_db to smi;
+grant all privileges on  SCHEMA public  to smi;
+
+select  * from information_schema.role_table_grants where grantee='smi';
+
 
 
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO farmac;
@@ -50,3 +69,29 @@ por baixo de # IPv4 local connections:
 update-rc.d postgresql defaults
 
 
+
+
+\c dhis2
+
+
+GRANT CONNECT ON DATABASE dhis_pepfar to dhis;
+
+GRANT USAGE ON SCHEMA public to dhis; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO dhis;
+GRANT all privileges ON ALL TABLES IN SCHEMA public TO dhis;
+
+
+\c dhis_pepfar_datim
+
+
+
+GRANT CONNECT ON DATABASE dhis_pepfar_datim to datim;
+GRANT USAGE ON SCHEMA public to datim; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO datim;
+GRANT all privileges ON ALL TABLES IN SCHEMA public TO datim;
+
+create user dhis_fg with encrypted password '@Dh15ccs2020';
+GRANT CONNECT ON DATABASE dhis_fg to dhis_fg;
+GRANT USAGE ON SCHEMA public to dhis_fg; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO dhis_fg;
+GRANT all privileges ON ALL TABLES IN SCHEMA public TO dhis_fg;
