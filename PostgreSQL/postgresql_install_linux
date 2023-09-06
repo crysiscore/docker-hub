@@ -95,3 +95,57 @@ GRANT CONNECT ON DATABASE dhis_fg to dhis_fg;
 GRANT USAGE ON SCHEMA public to dhis_fg; 
 GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO dhis_fg;
 GRANT all privileges ON ALL TABLES IN SCHEMA public TO dhis_fg;
+
+
+--      Farmacia     DD
+
+\c central;
+create user tfonseca with encrypted password '@fonseca01';
+GRANT CONNECT ON DATABASE central to tfonseca;
+GRANT USAGE ON SCHEMA public to tfonseca; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO tfonseca;
+GRANT all privileges ON ALL TABLES IN SCHEMA public TO tfonseca;
+
+
+create user mismael with encrypted password '@ismael02';
+GRANT CONNECT ON DATABASE central to mismael;
+GRANT USAGE ON SCHEMA public to mismael; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO mismael;
+GRANT all privileges ON ALL TABLES IN SCHEMA public TO mismael;
+
+
+create user smucane with encrypted password '@mucane03';
+GRANT CONNECT ON DATABASE central to smucane;
+GRANT USAGE ON SCHEMA public to smucane; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO smucane;
+GRANT all privileges ON ALL TABLES IN SCHEMA public TO smucane;
+
+create user emachaila with encrypted password '@machaila04';
+GRANT CONNECT ON DATABASE central to emachaila;
+GRANT USAGE ON SCHEMA public to emachaila; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO emachaila;
+GRANT all privileges ON ALL TABLES IN SCHEMA public TO emachaila;
+
+
+create user eguiruta with encrypted password '@guirruta05';
+GRANT CONNECT ON DATABASE central to eguiruta;
+GRANT USAGE ON SCHEMA public to eguiruta; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO eguiruta;
+GRANT all privileges ON ALL TABLES IN SCHEMA public TO eguiruta;
+
+
+
+
+create user rbuanali with encrypted password '@buanali06';
+GRANT CONNECT ON DATABASE central to rbuanali;
+GRANT USAGE ON SCHEMA public to rbuanali; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO rbuanali;
+GRANT all privileges ON ALL TABLES IN SCHEMA public TO rbuanali;
+
+
+
+create user jjordao with encrypted password '@jordao07';
+GRANT CONNECT ON DATABASE central to jjordao;
+GRANT USAGE ON SCHEMA public to jjordao; 
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO jjordao;
+GRANT all privileges ON ALL TABLES IN SCHEMA public TO jjordao;

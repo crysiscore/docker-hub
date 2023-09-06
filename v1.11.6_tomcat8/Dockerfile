@@ -41,6 +41,7 @@ RUN  mkdir /root/.OpenMRS
 COPY .OpenMRS /root/.OpenMRS
 RUN ls -la /root/
 RUN chmod -R 777 /root/.OpenMRS/
+
 #RUN cp /root/.OpenMRS/*.properties /usr/local/tomcat8/bin/
 #RUN rm -f  /root/.OpenMRS/*.properties
 
@@ -49,7 +50,6 @@ ENV PATH $PATH:$CATALINA_HOME/bin
 
 
 VOLUME ["/usr/local/tomcat8/webapps","/root/"]
-
 WORKDIR /usr/local/tomcat8/bin
 
 EXPOSE 8080

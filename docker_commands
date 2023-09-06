@@ -170,3 +170,9 @@ docker run --name mysql_master_patient_index    -v /data_ssd_2/mysqldata:/var/li
 
 /sbin/shutdown -r now
   30   5   *   *    1-5   docker  container restart -t 10 openmrs_2x
+
+
+
+
+
+  

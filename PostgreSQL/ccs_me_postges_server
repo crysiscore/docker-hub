@@ -9,13 +9,17 @@ psql -Upostgres -W -p2345 -h127.0.0.1
 
 ALTER USER authenticator WITH SUPERUSER;
 
-SELECT 
-   patientid,
-   dispensatrimestral, 
-    patientfirstname,
-    patientlastname,
-    pickupdate,
-    dateexpectedstring,
-    mainclinicname,
-    syncstatus
-from sync_temp_dispense where patientid= '0111010801/2008/01506';
+ #  idart-postges
+
+
+ docker run -d \
+	--name idart-postgres \
+	-e POSTGRES_PASSWORD=3De38@_qs \
+  -p 5401:5432 \
+	-v  ~/backups_idart:/data \
+  -e POSTGRES_HOST_AUTH_METHOD=md5 \
+	postgres:13.9-bullseye
+## Sidmat postgres server
+
+ docker run -d 	--name sidmat_postgres 	-e POSTGRES_PASSWORD=3De38@_qs 	-e POSTGRES_USER=sidmat 	-e POSTGRES_DB=sidmat  -e POSTGRES_HOST_AUTH_METHOD=md5   -p 5404:5432  	postgres:13.12-bookworm
+
